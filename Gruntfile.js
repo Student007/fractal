@@ -3,7 +3,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    // JS TASKS ================================================================
     // check all js files for errors
     jshint: {
       all: ['public/src/js/**/*.js'] 
@@ -13,7 +12,7 @@ module.exports = function(grunt) {
     ngAnnotate: {
       goalpro: {  
         files: {
-          'public/src/js/annotated.js': ['public/src/js/**/*.js'],
+          'public/tmp/js/annotated.js': ['public/src/js/**/*.js'],
         }
       }
     },
@@ -22,12 +21,11 @@ module.exports = function(grunt) {
     uglify: {
       build: {
         files: {
-          'public/dist/js/app.min.js': ['public/src/js/annotated.js']
+          'public/dist/js/app.min.js': ['public/tmp/js/annotated.js']
         }
       }
     },
 
-    // CSS TASKS ===============================================================
     // process the sass files to style.css
     compass: {
       dist: {
@@ -47,7 +45,6 @@ module.exports = function(grunt) {
       }
     },
 
-    // COOL TASKS ==============================================================
     // watch css and js files and process the above tasks
     watch: {
       css: {
@@ -73,6 +70,13 @@ module.exports = function(grunt) {
         logConcurrentOutput: true
       },
       tasks: ['nodemon', 'watch']
+    },
+
+    // clean files
+    clean: {
+      dist: {
+        src: ["/public/tmp/"]
+      }
     }   
 
   });
@@ -85,6 +89,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
-  grunt.registerTask('default', ['compass', 'cssmin', 'jshint', 'ngAnnotate', 'uglify', 'concurrent']);
+  grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'jshint', 'ngAnnotate', 'uglify', 'concurrent']);
 };
