@@ -1,4 +1,5 @@
 // public/js/services/PageService.js
+
 angular.module('goals').factory('PageService', ['$http', function($http) {
     return {
         // call to get all projects

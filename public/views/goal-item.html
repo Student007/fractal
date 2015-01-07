@@ -1,7 +1,18 @@
 <!-- public/views/goal-item.html -->
 
-<div class="jumbotron text-center">
-    <h1>Goal Item</h1>
-
-    <p>{{ goal.name }}</p>
+<div class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">fractal</a>
+		</div>
+	</div>
 </div>
+
+<breadcrumbs project="project" trail="breadcrumbs" goal="goal"></breadcrumbs>
+
+<div>
+    <h1>Goal Item</h1>
+    <p>{{ goal.name }}</p
+</div>
+
+<goal-list goals="subgoals" project="project"></goal-list>
