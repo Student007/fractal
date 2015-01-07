@@ -12,8 +12,20 @@ $routeProvider
 
     // project page
     .when('/projects', {
-        templateUrl: 'views/project.html',
+        templateUrl: 'views/project-list.html',
         controller: 'ProjectController'
+    })
+
+    // individual project page
+    .when('/project/:projectId', {
+        templateUrl: 'views/project-list.html',
+        controller: 'ProjectController'
+    })
+
+    // goal page
+    .when('/project/:projectId/goal/:goalId', {
+        templateUrl: 'views/goal-item.html',
+        controller: 'GoalController'
     });
 
 $locationProvider.html5Mode(true);

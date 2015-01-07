@@ -3,6 +3,8 @@
 var Project   = require('../models/project');
 var Goal      = require('../models/goal');
 var Milestone = require('../models/milestone');
+var Note      = require('../models/note');
+var Category  = require('../models/category');
 
 module.exports = function(app) {
     //get all projects
@@ -65,6 +67,18 @@ module.exports = function(app) {
         });
 
         Milestone.remove({
+            projectId : req.params.project_id
+        }, function(err, milestone) {
+            if (err) res.send(err);
+        });
+
+        Note.remove({
+            projectId : req.params.project_id
+        }, function(err, milestone) {
+            if (err) res.send(err);
+        });
+
+        Category.remove({
             projectId : req.params.project_id
         }, function(err, milestone) {
             if (err) res.send(err);

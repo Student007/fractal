@@ -2,6 +2,7 @@
 
 var Goal      = require('../models/goal');
 var Milestone = require('../models/milestone');
+var Note      = require('../models/note');
 
 module.exports = function(app) {
     //get all goals
@@ -58,8 +59,8 @@ module.exports = function(app) {
             goal.description = req.body.description;
             goal.beginDate = req.body.beginDate;
             goal.endDate = req.body.endDate;
-            goal.color = req.body.color;
             goal.percentComplete = req.body.percentComplete;
+            goal.categoryId = req.body.categoryId;
             goal.parentId = req.body.parentId;
             goal.projectId = req.body.projectId;
 
@@ -75,6 +76,10 @@ module.exports = function(app) {
     app.post('/api/goals', function(req, res) {
         if (req.body.parentId == "") {
             delete req.body.parentId;
+        }
+
+        if (req.body.categoryId == "") {
+            delete req.body.categoryId;
         }
 
         var goal = new Goal(req.body);
@@ -101,6 +106,12 @@ module.exports = function(app) {
         });
 
         Milestone.remove({
+            parentId: req.params.goal_id
+        }, function(err, goal) {
+            if (err) res.send(err);
+        });
+
+        Note.remove({
             parentId: req.params.goal_id
         }, function(err, goal) {
             if (err) res.send(err);

@@ -38,6 +38,10 @@ app.use(express.static(__dirname + '/public'));
 // routes ==================================================
 require('./app/routes/project')(app);
 require('./app/routes/goal')(app);
+require('./app/routes/milestone')(app);
+require('./app/routes/note')(app);
+require('./app/routes/category')(app);
+require('./app/routes/pages')(app);
 
 require('./app/routes/frontend')(app);
 

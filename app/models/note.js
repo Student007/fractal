@@ -1,13 +1,10 @@
 var mongoose = require('mongoose');
 
-// goal model
-module.exports = mongoose.model('Goal', {
+// note model
+module.exports = mongoose.model('Note', {
     name : { type : String, required : true },
     description : {type : String, default: ''},
-    beginDate : Date,
-    endDate : Date,
-    percentComplete : Number,
-    categoryId : { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
+    dateAdded : { type: Date },
     parentId : { type: mongoose.Schema.Types.ObjectId, ref: 'Goal' },
     projectId : { type: mongoose.Schema.Types.ObjectId, ref: 'Project', required: true }
 });
