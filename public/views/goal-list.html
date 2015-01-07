@@ -1,0 +1,10 @@
+<div ng-repeat="g in goals" class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">{{ g.goal.name }}</h3>
+		</div>
+		<div class="panel-body">
+			<p><strong>Notes:</strong> {{ g.stats.numNotes }}</p>
+			<p><strong>SubGoals:</strong> {{ g.stats.numSubgoals }}</p>
+			<a href="/project/{{ project._id }}/goal/{{ g.goal._id }}">Open Goal »</a>
+		</div>
+</div>

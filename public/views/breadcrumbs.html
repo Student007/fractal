@@ -1,0 +1,5 @@
+<ol class="breadcrumb">
+	<li><a href="/project/{{ project._id }}">{{ project.name }}</a></li>
+	<li ng-repeat=" breadcrumb in trail | orderBy: '-order'"><a href="/project/{{ project._id }}/goal/{{ breadcrumb._id }}">{{ breadcrumb.name }}</a></li>
+	<li ng-show="goal != null" class="active">{{ goal.name }}</li>
+</ol> 
