@@ -2,9 +2,9 @@
 
 angular.module('goals').controller('GoalController', function($scope, $routeParams, PageService) {
     $scope.id   = $routeParams.goalId;   
-    $scope.page = null;
+    $scope.p = null;
 
     PageService.getGoalLanding($scope.id).then(function(result) {
-        $scope.page = result.data;
+        $scope.p = result.data;
     });
 });
