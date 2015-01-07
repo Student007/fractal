@@ -105,7 +105,8 @@ module.exports = function(app) {
             subgoals: [],
             notes: [],
             milestones: [],
-            categories: []
+            categories: [],
+            breadcrumbs: []
         };
 
         async.series([
@@ -185,6 +186,12 @@ module.exports = function(app) {
                     page.categories = categories;
                     callback();
                 });
+            }, function(callback) {
+                // find all breadcrumbs using breadcrumb builder
+                breadCrumbBuilder(page.goal.parentId, function(bc) {
+                    page.breadcrumbs = bc;
+                    callback();
+                });
             }], function(err) {
                 if (err) callback(err);
                 callback();
@@ -194,4 +201,35 @@ module.exports = function(app) {
             res.json(page);
         });
     });
+
+    // takes an id and returns json for the
+    // breadcrumbs associated with the goal
+    // all the way to the top level parent
+    function breadCrumbBuilder(id, callback) {
+        var breadcrumbs = [];
+
+        var q = async.queue(function(g, callback) {
+            if (g._id != null) {
+                Goal.findById(g._id, function(err, goal) {
+                    breadcrumbs.push({
+                             '_id' : goal._id,
+                             'name' : goal.name,
+                             'order' : g.order + 1
+                            });
+
+                    q.push({ _id : goal.parentId, order : g.order + 1 });                  
+                    callback();
+                });
+            } else {
+                callback();
+            }
+        }, 5);
+
+        q.drain = function() {
+            callback(breadcrumbs);
+        }
+
+        q.push({ _id : id, order : 0 });
+    }
 };
+
