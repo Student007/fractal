@@ -33,10 +33,10 @@ module.exports = function(app) {
             project.name = req.body.name;
             project.description = req.body.description;
 
-            project.save(function(err) {
+            project.save(function(err, project) {
                 if (err) res.send(err);
 
-                res.json({ success: 'Project Updated'});
+                res.json({ success: project });
             });
         });
     });
@@ -45,10 +45,10 @@ module.exports = function(app) {
     app.post('/api/projects', function(req, res) {
         var project = new Project(req.body);
 
-        project.save(function(err) {
+        project.save(function(err, project) {
             if (err) res.send(err);
 
-            res.json({success: 'Project Created'});
+            res.json({success: project });
         });
     });
 

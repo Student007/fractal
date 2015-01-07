@@ -202,9 +202,10 @@ module.exports = function(app) {
         });
     });
 
-    // takes an id and returns json for the
+    // takes an id and callback function
+    // and uses the callback to return json with the
     // breadcrumbs associated with the goal
-    // all the way to the top level parent
+    // excluding the project and the initial goal
     function breadCrumbBuilder(id, callback) {
         var breadcrumbs = [];
 

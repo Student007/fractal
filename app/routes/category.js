@@ -58,10 +58,10 @@ module.exports = function(app) {
             category.color = req.body.color;
             category.projectId = req.body.projectId;
 
-            category.save(function(err) {
+            category.save(function(err, category) {
                 if (err) res.send(err);
 
-                res.json({ success: 'Category Updated'});
+                res.json({ success: category});
             });
         });
     });
@@ -74,10 +74,10 @@ module.exports = function(app) {
 
         var category = new Category(req.body);
 
-        category.save(function(err) {
+        category.save(function(err, category) {
             if (err) res.send(err);
 
-            res.json({ success: 'Category Created'});
+            res.json({ success: category});
         });
     });
 

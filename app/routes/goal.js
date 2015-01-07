@@ -64,10 +64,10 @@ module.exports = function(app) {
             goal.parentId = req.body.parentId;
             goal.projectId = req.body.projectId;
 
-            goal.save(function(err) {
+            goal.save(function(err, goal) {
                 if (err) res.send(err);
 
-                res.json({ success: 'Goal Updated'});
+                res.json({ success: goal });
             });
         });
     });
@@ -84,10 +84,10 @@ module.exports = function(app) {
 
         var goal = new Goal(req.body);
 
-        goal.save(function(err) {
+        goal.save(function(err, goal) {
             if (err) res.send(err);
 
-            res.json({success: 'Goal Created'});
+            res.json({ success: goal });
         });
     });
 

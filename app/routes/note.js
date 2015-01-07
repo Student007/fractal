@@ -59,10 +59,10 @@ module.exports = function(app) {
             note.parentId = req.body.parentId;
             note.projectId = req.body.projectId;
 
-            note.save(function(err) {
+            note.save(function(err, note) {
                 if (err) res.send(err);
 
-                res.json({ success: 'Note Updated'});
+                res.json({ success: note });
             });
         });
     });
@@ -75,10 +75,10 @@ module.exports = function(app) {
 
         var note = new Note(req.body);
 
-        note.save(function(err) {
+        note.save(function(err, note) {
             if (err) res.send(err);
 
-            res.json({ success: 'Note Created'});
+            res.json({ success: note });
         });
     });
 

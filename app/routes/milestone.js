@@ -61,10 +61,10 @@ module.exports = function(app) {
             milestone.parentId = req.body.parentId;
             milestone.projectId = req.body.projectId;
 
-            milestone.save(function(err) {
+            milestone.save(function(err, milestone) {
                 if (err) res.send(err);
 
-                res.json({ success: 'Milestone Updated'});
+                res.json({ success: milestone });
             });
         });
     });
@@ -77,10 +77,10 @@ module.exports = function(app) {
 
         var milestone = new Milestone(req.body);
 
-        milestone.save(function(err) {
+        milestone.save(function(err, milestone) {
             if (err) res.send(err);
 
-            res.json({ success: 'Milestone Created'});
+            res.json({ success: milestone });
         });
     });
 
