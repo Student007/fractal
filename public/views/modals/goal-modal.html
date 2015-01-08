@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h3 class="modal-title">Goal</h3>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" ng-required="true" ng-model="goal.name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea ng-model="goal.description" class="form-control"></textarea>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Begin Date</label>
+            <p class="input-group">
+              <input type="text" datepicker-popup class="form-control" ng-model="goal.beginDate" is-open="open.beginDate" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDateDialog($event, 'beginDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+        <div class="form-group col-md-6">
+            <label>End Date</label>
+            <p class="input-group">
+              <input type="text" datepicker-popup class="form-control" ng-model="goal.endDate" is-open="open.endDate" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDateDialog($event, 'endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button ng-if="method == 'update'" class="btn btn-danger" ng-click="delete()">Delete</button>
+    <button ng-if="method == 'create'" ng-disabled="true" class="btn btn-primary" ng-click="create()">Create</button>
+    <button ng-if="method == 'update'" class="btn btn-primary" ng-click="update()">Update</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

@@ -1,0 +1,11 @@
+/* _forms.scss */
+
+.form-group {
+	.ng-invalid {
+		border: 1px solid #ee6666;
+	}
+
+	textarea {
+		resize: none;
+	}
+}

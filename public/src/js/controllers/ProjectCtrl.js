@@ -1,4 +1,4 @@
-// public/js/controllers/ProjectCtrl.js
+// public/src/js/controllers/ProjectCtrl.js
 
 angular.module('goals').controller('ProjectController', function($scope, $routeParams, PageService) {
     $scope.id          = $routeParams.projectId;

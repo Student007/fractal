@@ -9,13 +9,13 @@
 	</div>
 
 	<div class="btn-group" dropdown>
-	  <button type="button" class="btn btn-primary">Create</button>
+	  <button type="button" class="btn btn-primary" ng-click="createGoalModal()">Create</button>
 	  <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
 	    <span class="caret"></span>
 	    <span class="sr-only">Create</span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu">
-	    <li><a href="#">Goal</a></li>
+	    <li><a href ng-click="createGoalModal()">Goal</a></li>
 	    <li><a href="#">Note</a></li>
 	    <li><a href="#">Milestone</a></li>
 	  </ul>
