@@ -8,8 +8,17 @@
 	</div>
 </div>
 
-<div class="jumbotron text-center">
-    <h1>Project Item</h1>
+<div class="page-header">
+	<h3>{{ project.name }} <small>project</small></h3>
+</div>
 
-    <p>{{ project.name }}</p
+<div class="jumbotron text-center">
+    <h1>Timeline</h1>
+</div>
+
+<div>
+	<tabset>
+		<tab heading="Subgoals"><goal-list goals="subgoals" project="project"></goal-list></tab>
+		<tab heading="Notes"><note-list notes="notes"></note-list></tab>
+	</tabset>
 </div>

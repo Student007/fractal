@@ -1,2 +1,2 @@
 // public/js/app.js
-angular.module('goals', ['ngRoute']);
+angular.module('goals', ['ngRoute', 'ui.bootstrap']);

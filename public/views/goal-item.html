@@ -8,11 +8,19 @@
 	</div>
 </div>
 
-<breadcrumbs project="project" trail="breadcrumbs" goal="goal"></breadcrumbs>
-
-<div>
-    <h1>Goal Item</h1>
-    <p>{{ goal.name }}</p
+<div class="page-header">
+	<h3>{{ goal.name }} <small>goal</small></h3>
 </div>
 
-<goal-list goals="subgoals" project="project"></goal-list>
+<breadcrumbs project="project" trail="breadcrumbs" goal="goal"></breadcrumbs>
+
+<div class="jumbotron text-center">
+    <h1>Timeline</h1>
+</div>
+
+<div>
+	<tabset>
+		<tab heading="Subgoals"><goal-list goals="subgoals" project="project"></goal-list></tab>
+		<tab heading="Notes"><note-list notes="notes"></note-list></tab>
+	</tabset>
+</div>

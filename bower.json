@@ -1,11 +1,12 @@
 {
-    "name": "goalpro",
-    "version": "0.0.1",
-    "dependencies": {
-        "bootstrap": "latest",
-        "font-awesome": "latest",
-        "animate.css": "latest",
-        "angular": "latest",
-        "angular-route": "latest"   
-    }
+  "name": "goalpro",
+  "version": "0.0.1",
+  "dependencies": {
+    "bootstrap": "latest",
+    "font-awesome": "latest",
+    "animate.css": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-bootstrap": "latest"
+  }
 }
