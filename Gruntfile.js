@@ -31,7 +31,7 @@ module.exports = function(grunt) {
       dist: {
         options: {
           sassDir: 'public/src/styles/',
-          cssDir: 'public/dist/styles/'
+          cssDir: 'public/tmp/styles/'
         }
       }
     },
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
     cssmin: {
       build: {
         files: {
-          'public/dist/styles/style.min.css': 'public/dist/styles/style.css'
+          'public/dist/styles/style.min.css': 'public/tmp/styles/main.css'
         }
       }
     },

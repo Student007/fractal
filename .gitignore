@@ -3,5 +3,5 @@ node_modules/
 db/
 public/dist/
 public/libs/
-public/tmp/js/annotated.js
+public/tmp/
 npm-debug.log

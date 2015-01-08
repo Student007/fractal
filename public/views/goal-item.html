@@ -1,26 +1,34 @@
 <!-- public/views/goal-item.html -->
 
-<div class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/">fractal</a>
-		</div>
+<div class="goal-page">
+	<breadcrumbs ng-if="isGoal" project="project" trail="breadcrumbs" goal="goal"></breadcrumbs>
+
+	<div class="page-header">
+		<h3 ng-if="isGoal">{{ goal.name }} <small>goal</small></h3>
+		<h3 ng-if="!isGoal">{{ project.name }} <small>project</small></h3>
 	</div>
-</div>
 
-<div class="page-header">
-	<h3>{{ goal.name }} <small>goal</small></h3>
-</div>
+	<div class="btn-group" dropdown>
+	  <button type="button" class="btn btn-primary">Create</button>
+	  <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+	    <span class="caret"></span>
+	    <span class="sr-only">Create</span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+	    <li><a href="#">Goal</a></li>
+	    <li><a href="#">Note</a></li>
+	    <li><a href="#">Milestone</a></li>
+	  </ul>
+	</div>
 
-<breadcrumbs project="project" trail="breadcrumbs" goal="goal"></breadcrumbs>
+	<div class="jumbotron text-center">
+	    <h1>Timeline</h1>
+	</div>
 
-<div class="jumbotron text-center">
-    <h1>Timeline</h1>
-</div>
-
-<div>
-	<tabset>
-		<tab heading="Subgoals"><goal-list goals="subgoals" project="project"></goal-list></tab>
-		<tab heading="Notes"><note-list notes="notes"></note-list></tab>
-	</tabset>
+	<div>
+		<tabset>
+			<tab heading="Subgoals"><goal-list goals="subgoals" project="project"></goal-list></tab>
+			<tab heading="Notes"><note-list notes="notes"></note-list></tab>
+		</tabset>
+	</div>
 </div>

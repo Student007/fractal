@@ -1,7 +1,9 @@
 // public/js/controllers/ProjectCtrl.js
 
 angular.module('goals').controller('ProjectController', function($scope, $routeParams, PageService) {
-    $scope.id          = $routeParams.projectId;   
+    $scope.id          = $routeParams.projectId;
+    $scope.isGoal      = false;
+       
     $scope.project     = null;
     $scope.subgoals    = [];
     $scope.notes       = [];

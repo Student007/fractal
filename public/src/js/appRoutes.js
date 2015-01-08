@@ -18,7 +18,7 @@ $routeProvider
 
     // individual project page
     .when('/project/:projectId', {
-        templateUrl: 'views/project-item.html',
+        templateUrl: 'views/goal-item.html',
         controller: 'ProjectController'
     })
 
