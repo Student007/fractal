@@ -63,6 +63,13 @@ angular.module('goals').factory('PageService', function($http, $rootScope) {
         // return page
         getPage : function() {
             return page;
+        },
+
+        // get active item
+        getActiveItem : function() {
+            var active = (page.isGoal ? page.goal : page.project);
+            active.isGoal = page.isGoal;
+            return active;
         }
     };       
 });

@@ -91,13 +91,17 @@ angular.module('goals').controller('MainController', function($scope, $modal, $l
             if (proceed) {
                 GoalService.delete(goal._id).then(function(result) {
                     if (result.data.success) {
-                        var path = '/project/' + goal.projectId;
+                        if (goal._id === PageService.getActiveItem()._id) {
+                            var path = '/project/' + goal.projectId;
 
-                        if (goal.parentId !== null) {
-                            path = path + '/goal/' + goal.parentId;
+                            if (goal.parentId !== null) {
+                                path = path + '/goal/' + goal.parentId;
+                            }
+
+                            $location.path(path);
+                        } else {
+                            PageService.reloadData();
                         }
-
-                        $location.path(path);
                     }
                 });
             }

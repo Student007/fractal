@@ -1,5 +1,9 @@
 // app/routes/goal.js
 
+// Helper libraries
+var async     = require('async');
+
+// Models
 var Goal      = require('../models/goal');
 var Milestone = require('../models/milestone');
 var Note      = require('../models/note');
@@ -99,11 +103,29 @@ module.exports = function(app) {
             if (err) res.send(err);
         });
 
-        Goal.remove({
-            parentId: req.params.goal_id
-        }, function(err, goal) {
-            if (err) res.send(err);
-        });
+        var recursiveChildDelete = function(id) {
+            async.series([ function(callback) {
+                Goal.find({ parentId: id }, function(err, children) {
+                    if (err) callback(err);
+                    
+                    async.forEach(children, function(child, callback) {
+                        recursiveChildDelete(child._id);
+                        callback();
+                    }, function(err) {
+                        if (err) callback(err);
+                        callback();
+                    });
+                });
+            }, function(callback) {
+                Goal.remove({ parentId : id }, function(err, goal) {
+                    if (err) callback(err);
+                    callback();
+                });
+            }], function(err) {
+                if (err) res.send(err);
+            });
+        };
+        recursiveChildDelete(req.params.goal_id);
 
         Milestone.remove({
             parentId: req.params.goal_id
