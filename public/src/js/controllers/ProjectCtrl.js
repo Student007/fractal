@@ -11,11 +11,17 @@ angular.module('goals').controller('ProjectController', function($scope, $routeP
     $scope.milestones  = [];
     $scope.categories  = [];
 
-    PageService.getProjectLanding($scope.id).then(function(result) {
-        $scope.project        = result.data.project;
-        $scope.subgoals       = result.data.subgoals;
-        $scope.notes          = result.data.notes;
-        $scope.milestones     = result.data.milestones;
-        $scope.categories     = result.data.categories;
+    var assignData = function(result) {
+        $scope.goal           = result.goal;
+        $scope.project        = result.project;
+        $scope.subgoals       = result.subgoals;
+        $scope.notes          = result.notes;
+        $scope.milestones     = result.milestones;
+        $scope.categories     = result.categories;
+    };
+
+    PageService.getProjectLanding($scope.id).then(assignData);
+    $scope.$on('data-reload', function(event, result) { 
+        assignData(result);
     });
 });

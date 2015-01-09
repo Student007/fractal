@@ -24,8 +24,6 @@ angular.module('goals').controller('GoalModalController', function($scope, $moda
     };
 
     $scope.cancel = function () {
-        console.log(parentId);
-        console.log(projectId);
         $modalInstance.dismiss('cancel');
     };
 

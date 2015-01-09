@@ -12,13 +12,18 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
     $scope.categories  = [];
     $scope.breadcrumbs = [];
 
-    PageService.getGoalLanding($scope.id).then(function(result) {
-        $scope.goal        = result.data.goal;
-        $scope.project     = result.data.project;
-        $scope.subgoals    = result.data.subgoals;
-        $scope.notes       = result.data.notes;
-        $scope.milestones  = result.data.milestones;
-        $scope.categories  = result.data.categories;
-        $scope.breadcrumbs = result.data.breadcrumbs;
+    var assignData = function(result) {
+        $scope.goal        = result.goal;
+        $scope.project     = result.project;
+        $scope.subgoals    = result.subgoals;
+        $scope.notes       = result.notes;
+        $scope.milestones  = result.milestones;
+        $scope.categories  = result.categories;
+        $scope.breadcrumbs = result.breadcrumbs;
+    };
+
+    PageService.getGoalLanding($scope.id).then(assignData);
+    $scope.$on('data-reload', function(event, result) { 
+        assignData(result);
     });
 });
