@@ -9,8 +9,8 @@ angular.module('goals').factory('GoalService', ['$http', function($http) {
             return $http.post('/api/goals', goalData);
         },
 
-        put : function(goalData) {
-            return $http.put('/api/goals', goalData);
+        update : function(goalData) {
+            return $http.put('/api/goals/' + goalData._id, goalData);
         },
 
         delete : function(id) {

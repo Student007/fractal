@@ -1,23 +1,16 @@
 // public/src/js/GoalModalCtrl.js
 
-angular.module('goals').controller('GoalModalController', function($scope, $modalInstance, method, projectId, parentId) {
+angular.module('goals').controller('GoalModalController', function($scope, $modalInstance, $filter, method, goal) {
     $scope.method = method;
     
-    $scope.goal = {
-        name: '',
-        description: '',
-        beginDate: null,
-        endDate: null,
-        percentComplete: 0,
-        categoryId: null,
-        parentId: parentId,
-        projectId: projectId
-    };
+    $scope.goal = goal;
 
-    $scope.open = {
-        beginDate: false,
-        endDate: false
-    };
+    if ($scope.goal.beginDate !== null) {
+        $scope.goal.beginDate = new Date($scope.goal.beginDate);
+    }
+    if ($scope.goal.endDate !== null) {
+        $scope.goal.endDate = new Date($scope.goal.endDate);
+    }
 
     $scope.ok = function () {
         $modalInstance.close($scope.goal);
@@ -27,12 +20,13 @@ angular.module('goals').controller('GoalModalController', function($scope, $moda
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.openDateDialog = function($event, which) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.open.beginDate = false;
-        $scope.open.endDate = false;
-        $scope.open[which] = true;
+    $scope.delete = function() {
+        $modalInstance.dismiss('delete');
+    };
+
+    $scope.resetDates = function() {
+        goal.beginDate = null;
+        goal.endDate = null;
     };
 
     $scope.invalidDate = function(begin, end) {

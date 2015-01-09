@@ -20,6 +20,14 @@
 	    <li><a href="#">Milestone</a></li>
 	  </ul>
 	</div>
+	<div class="pull-right">
+		<div class="btn-group">
+			<button type="button" ng-if="isGoal" class="btn btn-primary" ng-click="updateGoalModal(goal)">Edit</button>
+		</div>
+		<div class="btn-group">
+			<button type="button" ng-if="isGoal" class="btn btn-danger" ng-click="deleteGoal(goal)">Delete</button>
+		</div>
+	</div>
 
 	<div class="jumbotron text-center">
 	    <h1>Timeline</h1>
@@ -29,6 +37,7 @@
 		<tabset>
 			<tab heading="Subgoals"><goal-list goals="subgoals" project="project"></goal-list></tab>
 			<tab heading="Notes"><note-list notes="notes"></note-list></tab>
+			<tab heading="Description">{{ isGoal ? goal.description : project.description }}</tab>
 		</tabset>
 	</div>
 </div>

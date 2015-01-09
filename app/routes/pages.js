@@ -129,7 +129,7 @@ module.exports = function(app) {
             }, function(callback) {
                 // find all top-level goals associated with project
                 // additionally, add a note count and subgoal count
-                Goal.find({ parentId: req.params.goal_id }, '_id name beginDate endDate percentComplete categoryId', function(err, goals) {
+                Goal.find({ parentId: req.params.goal_id }, function(err, goals) {
                     if (err) callback(err);
 
                     async.forEach(goals, function(currentGoal, callback) {
