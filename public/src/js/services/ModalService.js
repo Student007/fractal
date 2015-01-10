@@ -1,19 +1,35 @@
 // public/src/js/controllers/ModalService.js
 
-angular.module('goals').service('ModalService', function($modal, $location, PageService, GoalService) {
+angular.module('goals').service('ModalService', function($modal, $location) {
     return {
         // modals
 
         // alert modal
-        alertModal : function(status, message) {
+        alertModal : function(title, message) {
             var modal = $modal.open({
                 templateUrl: 'views/modals/alert-modal.html',
                 controller: 'AlertModalController',
                 resolve: {
-                    status: function() { return status; },
+                    title: function() { return title; },
                     message: function() { return message; }
                 }
             });
+        },
+
+        // alert modal that waits for user response before callback
+        awaitDismissAlertModal : function(title, message, callback) {
+            var modal = $modal.open({
+                templateUrl: 'views/modals/alert-modal.html',
+                controller: 'AlertModalController',
+                backdrop: 'static',
+                windowClass: 'backdrop-hide-content',
+                resolve: {
+                    title: function() { return title; },
+                    message: function() { return message; }
+                }
+            });
+
+            modal.result.then(callback, callback);
         },
 
         // confirm modal
@@ -30,7 +46,7 @@ angular.module('goals').service('ModalService', function($modal, $location, Page
         },
 
         // new goal modal
-        createGoalModal : function(projectId, parentId) {
+        createGoalModal : function(projectId, parentId, callback) {
             var $this = this;
 
             var modal = $modal.open({
@@ -52,18 +68,11 @@ angular.module('goals').service('ModalService', function($modal, $location, Page
                 }
             });
 
-            modal.result.then(function(goal) {
-                GoalService.create(goal).then(function(result) {
-                    if (result.data.success) {
-                        PageService.reloadData();
-                        $this.alertModal('success', 'Goal created successfully!');
-                    }
-                });
-            });
+            modal.result.then(callback);
         },
 
         // update goal modal
-        updateGoalModal : function(goal) {
+        updateGoalModal : function(goal, updateCallback, dismissalCallback) {
             var $this = this;
 
             var modal = $modal.open({
@@ -75,41 +84,7 @@ angular.module('goals').service('ModalService', function($modal, $location, Page
                 }
             });
 
-            modal.result.then(function(goal) {
-                GoalService.update(goal).then(function(result) {
-                    if (result.data.success) {
-                        PageService.reloadData();
-                        $this.alertModal('success', 'Goal updated successfully!');
-                    }
-                });
-            }, function(dismissal) {
-                if (dismissal === 'delete') {
-                    $this.deleteGoalModal(goal);
-                }
-            });
+            modal.result.then(updateCallback, dismissalCallback);
         },
-
-        // delete goal with confirmation and relocate
-        deleteGoalModal : function(goal) {
-            this.confirmModal("Are you sure you want to delete this goal? <br /><br />All associated subgoals, notes, and milestones will be deleted as well.", function(proceed) {
-                if (proceed) {
-                    GoalService.delete(goal._id).then(function(result) {
-                        if (result.data.success) {
-                            if (goal._id === PageService.getActiveItem()._id) {
-                                var path = '/project/' + goal.projectId;
-
-                                if (goal.parentId !== null) {
-                                    path = path + '/goal/' + goal.parentId;
-                                }
-
-                                $location.path(path);
-                            } else {
-                                PageService.reloadData();
-                            }
-                        }
-                    });
-                }
-            });
-        }
     };
 });

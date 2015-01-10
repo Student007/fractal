@@ -16,31 +16,39 @@ angular.module('goals').factory('PageService', function($http, $rootScope) {
         // call to get a project page
         getProjectLanding : function(id) {
             return $http.get('/api/pages/project/' + id).then(function(result) {
-                page.isGoal     = false;
-                page.goal       = { _id : null };
-                page.project    = result.data.project;
-                page.subgoals   = result.data.subgoals;
-                page.notes      = result.data.notes;
-                page.milestones = result.data.milestones;
-                page.categories = result.data.categories;
+                if (result.data.error) {
+                    return result.data;
+                } else {
+                    page.isGoal     = false;
+                    page.goal       = { _id : null };
+                    page.project    = result.data.project;
+                    page.subgoals   = result.data.subgoals;
+                    page.notes      = result.data.notes;
+                    page.milestones = result.data.milestones;
+                    page.categories = result.data.categories;
 
-                return page;
+                    return page;
+                }
             });
         },
 
         // call to get a goal page
         getGoalLanding : function(id) {
             return $http.get('/api/pages/goal/' + id).then(function(result) {
-                page.isGoal      = true;
-                page.goal        = result.data.goal;
-                page.project     = result.data.project;
-                page.subgoals    = result.data.subgoals;
-                page.notes       = result.data.notes;
-                page.milestones  = result.data.milestones;
-                page.categories  = result.data.categories;
-                page.breadcrumbs = result.data.breadcrumbs;
+                if (result.data.error) {
+                    return result.data;
+                } else {
+                    page.isGoal      = true;
+                    page.goal        = result.data.goal;
+                    page.project     = result.data.project;
+                    page.subgoals    = result.data.subgoals;
+                    page.notes       = result.data.notes;
+                    page.milestones  = result.data.milestones;
+                    page.categories  = result.data.categories;
+                    page.breadcrumbs = result.data.breadcrumbs;
 
-                return page;
+                    return page;
+                }
             });
         },
 

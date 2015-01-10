@@ -26,73 +26,74 @@ module.exports = function(app) {
         function(callback) {
             // get and set project
             Project.findById(req.params.project_id, function(err, project) {
-                if (err) callback(err);
                 page.project = project;
-                callback();
+                if (project === null) {
+                    callback({ "message" : "Project does not exist!" });
+                } else {
+                    callback(err);
+                } 
             });
         }, function(callback) {
             // find all top-level goals associated with project
             // additionally, add a note count and subgoal count
             Goal.find({ projectId: req.params.project_id, parentId: null }, function(err, goals) {
-                if (err) callback(err);
+                if (goals) {
+                    async.forEach(goals, function(currentGoal, callback) {
+                        var stats = {
+                            numNotes: 0,
+                            numSubgoals: 0
+                        };
 
-                async.forEach(goals, function(currentGoal, callback) {
-                    var stats = {
-                        numNotes: 0,
-                        numSubgoals: 0
-                    };
-
-                    async.parallel([
-                    function(callback) {
-                        Note.count({ parentId: currentGoal._id }, function(err, count) {
-                            if (err) callback(err);
-                            stats.numNotes = count;
-                            callback();
+                        async.parallel([
+                        function(callback) {
+                            Note.count({ parentId: currentGoal._id }, function(err, count) {
+                                stats.numNotes = count;
+                                callback(err);
+                            });
+                        },
+                        function(callback) {
+                            Goal.count({ parentId: currentGoal._id }, function(err, count) {
+                                stats.numSubgoals = count;
+                                callback(err);
+                            });
+                        }], function(err) {
+                            page.subgoals.push({ 
+                                'goal' : currentGoal,
+                                'stats': stats
+                            });
+                            callback(err);
                         });
-                    },
-                    function(callback) {
-                        Goal.count({ parentId: currentGoal._id }, function(err, count) {
-                            if (err) callback(err);
-                            stats.numSubgoals = count;
-                            callback();
-                        });
-                    }], function(err) {
-                        if (err) callback(err);
-                        page.subgoals.push({ 
-                            'goal' : currentGoal,
-                            'stats': stats
-                        });
-                        callback();
+                    }, function(err) {
+                        callback(err);
                     });
-                }, function(err) {
-                    if (err) callback(err);
-                    callback();
-                });
+                } else {
+                    callback(err);
+                }
             });
         }, function(callback) {
             // find all top-level notes associated with this project
             Note.find({ projectId: req.params.project_id, parentId: null }, function(err, notes) {
-                if (err) callback(err);
                 page.notes = notes;
-                callback();
+                callback(err);
             });
         }, function(callback) {
             // find all top-level milestones associated with this project
             Milestone.find({ projectId: req.params.project_id, parentId: null }, function(err, milestones) {
-                if (err) callback(err);
                 page.milestones = milestones;
-                callback();
+                callback(err);
             });
         }, function(callback) {
             // find all categories associated with this project
             Category.find({ projectId: req.params.project_id }, function(err, categories) {
-                if (err) callback(err);
                 page.categories = categories;
-                callback();
+                callback(err);
             });
         }], function(err) {
-            if (err) res.send(err);
-            res.json(page);
+            if (err) {
+                res.json({ "error" : err });
+            } else {
+                res.json(page);
+            }
         });
     });
 
@@ -113,78 +114,75 @@ module.exports = function(app) {
         function(callback) {
             // get and set current goal
             Goal.findById(req.params.goal_id, function(err, goal) {
-                if (err) callback(err);
                 page.goal = goal;
-                callback();
+                if (goal === null) { 
+                    callback({ "message" : "Goal does not exist!" });
+                } else {
+                    callback(err);
+                }
             });
         }, function(callback) {
             async.parallel([
             function(callback) {
                 // get and set project
                 Project.findById(page.goal.projectId, function(err, project) {
-                    if (err) callback(err);
                     page.project = project;
-                    callback();
+                    callback(err);
                 });
             }, function(callback) {
                 // find all top-level goals associated with project
                 // additionally, add a note count and subgoal count
                 Goal.find({ parentId: req.params.goal_id }, function(err, goals) {
-                    if (err) callback(err);
+                    if (goals) {
+                        async.forEach(goals, function(currentGoal, callback) {
+                            var stats = {
+                                numNotes: 0,
+                                numSubgoals: 0
+                            };
 
-                    async.forEach(goals, function(currentGoal, callback) {
-                        var stats = {
-                            numNotes: 0,
-                            numSubgoals: 0
-                        };
-
-                        async.parallel([
-                        function(callback) {
-                            Note.count({ parentId: currentGoal._id }, function(err, count) {
-                                if (err) callback(err);
-                                stats.numNotes = count;
-                                callback();
+                            async.parallel([
+                            function(callback) {
+                                Note.count({ parentId: currentGoal._id }, function(err, count) {
+                                    stats.numNotes = count;
+                                    callback(err);
+                                });
+                            },
+                            function(callback) {
+                                Goal.count({ parentId: currentGoal._id }, function(err, count) {
+                                    stats.numSubgoals = count;
+                                    callback(err);
+                                });
+                            }], function(err) {
+                                page.subgoals.push({ 
+                                    'goal' : currentGoal,
+                                    'stats': stats
+                                });
+                                callback(err);
                             });
-                        },
-                        function(callback) {
-                            Goal.count({ parentId: currentGoal._id }, function(err, count) {
-                                if (err) callback(err);
-                                stats.numSubgoals = count;
-                                callback();
-                            });
-                        }], function(err) {
-                            if (err) callback(err);
-                            page.subgoals.push({ 
-                                'goal' : currentGoal,
-                                'stats': stats
-                            });
-                            callback();
+                        }, function(err) {
+                            callback(err);
                         });
-                    }, function(err) {
-                        if (err) callback(err);
-                        callback();
-                    });
+                    } else {
+                        callback(err);
+                    }
                 });
             }, function(callback) {
                 // find all top-level notes associated with this project
                 Note.find({ parentId: req.params.goal_id }, function(err, notes) {
-                    if (err) callback(err);
                     page.notes = notes;
-                    callback();
+                    callback(err);
                 });
             }, function(callback) {
                 // find all top-level milestones associated with this project
                 Milestone.find({ parentId: req.params.goal_id }, function(err, milestones) {
-                    if (err) callback(err);
                     page.milestones = milestones;
-                    callback();
+                    callback(err);
                 });
             }, function(callback) {
                 // find all categories associated with this project
                 Category.find({ projectId: page.goal.projectId }, function(err, categories) {
-                    if (err) callback(err);
                     page.categories = categories;
-                    callback();
+                    callback(err);
                 });
             }, function(callback) {
                 // find all breadcrumbs using breadcrumb builder
@@ -193,12 +191,14 @@ module.exports = function(app) {
                     callback();
                 });
             }], function(err) {
-                if (err) callback(err);
-                callback();
+                callback(err);
             });
         }], function(err) {
-            if (err) res.send(err);
-            res.json(page);
+            if (err) {
+                res.json({ "error" : err });
+            } else {
+                res.json(page);
+            }
         });
     });
 

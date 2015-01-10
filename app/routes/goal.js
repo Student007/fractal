@@ -12,67 +12,57 @@ module.exports = function(app) {
     //get all goals
     app.get('/api/goals', function(req, res) {
         Goal.find(function(err, goals) {
-            if (err) res.send(err);
-
-            res.json(goals);
+            if (err) res.send(err); else res.json(goals);
         });
     });
 
     //get all goals for a project
     app.get('/api/goals/by-project/:project_id', function(req, res) {
         Goal.find({ projectId : req.params.project_id }, function(err, goals) {
-            if (err) res.send(err);
-
-            res.json(goals);
+            if (err) res.send(err); else res.json(goals);
         });
     });
 
     //get all top-level goals for a project
     app.get('/api/goals/by-project/:project_id/top', function(req, res) {
         Goal.find({ projectId : req.params.project_id, parentId : null }, function(err, goals) {
-            if (err) res.send(err);
-
-            res.json(goals);
+            if (err) res.send(err); else res.json(goals);
         });
     });
 
     //get all child goals for a parent
     app.get('/api/goals/by-parent/:parent_id', function(req, res) {
         Goal.find({ parentId : req.params.parent_id }, function(err, goals) {
-            if (err) res.send(err);
-
-            res.json(goals);
+            if (err) res.send(err); else res.json(goals);
         });
     });
 
     // get a single goal
     app.get('/api/goals/:goal_id', function(req, res) {
         Goal.findById(req.params.goal_id, function(err, goal) {
-            if (err) res.send(err);
-
-            res.json(goal);
+            if (err) res.send(err); else res.json(goal);
         });
     });
 
     // update a single goal
     app.put('/api/goals/:goal_id', function(req, res) {
         Goal.findById(req.params.goal_id, function(err, goal) {
-            if (err) res.send(err);
+            if (err) {
+                res.send(err); 
+            } else { 
+                goal.name = req.body.name;
+                goal.description = req.body.description;
+                goal.beginDate = req.body.beginDate;
+                goal.endDate = req.body.endDate;
+                goal.percentComplete = req.body.percentComplete;
+                goal.categoryId = req.body.categoryId;
+                goal.parentId = req.body.parentId;
+                goal.projectId = req.body.projectId;
 
-            goal.name = req.body.name;
-            goal.description = req.body.description;
-            goal.beginDate = req.body.beginDate;
-            goal.endDate = req.body.endDate;
-            goal.percentComplete = req.body.percentComplete;
-            goal.categoryId = req.body.categoryId;
-            goal.parentId = req.body.parentId;
-            goal.projectId = req.body.projectId;
-
-            goal.save(function(err, goal) {
-                if (err) res.send(err);
-
-                res.json({ success: goal });
-            });
+                goal.save(function(err, goal) {
+                    if (err) res.send(err); else res.json({ success: goal });
+                });
+            }
         });
     });
 
@@ -89,71 +79,77 @@ module.exports = function(app) {
         var goal = new Goal(req.body);
 
         goal.save(function(err, goal) {
-            if (err) res.send(err);
-
-            res.json({ success: goal });
+            if (err) res.send(err); else res.json({ success: goal });
         });
     });
 
     // delete a goal
     app.delete('/api/goals/:goal_id', function(req, res) {
-        Goal.remove({
-            _id: req.params.goal_id
-        }, function(err, goal) {
-            if (err) res.send(err);
-        });
-
+        // delete all associated subgoals, milestones, and notes recursively
+        // return err if error, null otherwise 
         var recursiveChildDelete = function(id) {
             async.series([ function(callback) {
                 Goal.find({ parentId: id }, function(err, children) {
-                    if (err) callback(err);
-                    
-                    async.forEach(children, function(child, callback) {
-                        recursiveChildDelete(child._id);
-                        callback();
-                    }, function(err) {
-                        if (err) callback(err);
-                        callback();
-                    });
+                    if (children) {
+                        async.forEach(children, function(child, callback) {
+                            var err = recursiveChildDelete(child._id);
+                            callback(err);
+                        }, function(err) {
+                            callback(err);
+                        });
+                    } else {
+                        callback(err);
+                    }
                 });
             }, function(callback) {
                 async.parallel([ function(callback) {
                     Goal.remove({ parentId : id }, function(err, goal) {
-                        if (err) callback(err);
-                        callback();
+                        callback(err);
                     });
                 }, function(callback) {
                     Milestone.remove({ parentId : id }, function(err, milestone) {
-                        if (err) callback(err);
-                        callback();
+                        callback(err);
                     });
                 }, function(callback) {
                     Note.remove({ parentId : id }, function(err, note) {
-                        if (err) callback(err);
-                        callback();
+                        callback(err);
                     });
                 }], function(err) {
-                    if (err) callback(err);
-                    callback();
+                    callback(err);
                 });
             }], function(err) {
-                if (err) res.send(err);
+                if (err) return err; else return null;
             });
         };
-        recursiveChildDelete(req.params.goal_id);
 
-        Milestone.remove({
-            parentId: req.params.goal_id
-        }, function(err, goal) {
-            if (err) res.send(err);
+        // delete top level goal and its directly related elements
+        async.parallel([ function(callback) {
+            Goal.remove({
+                _id: req.params.goal_id
+            }, function(err, goal) {
+                callback(err);
+            });
+        }, function(callback) {
+            var err = recursiveChildDelete(req.params.goal_id);
+            callback(err);
+        }, function(callback) {
+            Milestone.remove({
+                parentId: req.params.goal_id
+            }, function(err, goal) {
+                callback(err);
+            });
+        }, function(callback) {
+            Note.remove({
+                parentId: req.params.goal_id
+            }, function(err, goal) {
+                callback(err);
+            });
+        }], function(err) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json({ success: 'Goal Deleted' });
+            }
         });
-
-        Note.remove({
-            parentId: req.params.goal_id
-        }, function(err, goal) {
-            if (err) res.send(err);
-        });
-
-        res.json({ success: 'Goal Deleted' });
     });
 };

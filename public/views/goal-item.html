@@ -9,23 +9,23 @@
 	</div>
 
 	<div class="btn-group" dropdown>
-	  <button type="button" class="btn btn-primary" ng-click="modals.createGoalModal(project._id, goal._id)">Create</button>
+	  <button type="button" class="btn btn-primary" ng-click="goalActions.createGoal(project._id, goal._id)">Create</button>
 	  <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
 	    <span class="caret"></span>
 	    <span class="sr-only">Create</span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu">
-	    <li><a href ng-click="modals.createGoalModal(project._id, goal._id)">Goal</a></li>
+	    <li><a href ng-click="goalActions.createGoal(project._id, goal._id)">Goal</a></li>
 	    <li><a href="#">Note</a></li>
 	    <li><a href="#">Milestone</a></li>
 	  </ul>
 	</div>
 	<div class="pull-right">
 		<div class="btn-group">
-			<button type="button" ng-if="isGoal" class="btn btn-primary" ng-click="modals.updateGoalModal(goal)">Edit</button>
+			<button type="button" ng-if="isGoal" class="btn btn-primary" ng-click="goalActions.updateGoal(goal)">Edit</button>
 		</div>
 		<div class="btn-group">
-			<button type="button" ng-if="isGoal" class="btn btn-danger" ng-click="modals.deleteGoalModal(goal)">Delete</button>
+			<button type="button" ng-if="isGoal" class="btn btn-danger" ng-click="goalActions.deleteGoal(goal)">Delete</button>
 		</div>
 	</div>
 

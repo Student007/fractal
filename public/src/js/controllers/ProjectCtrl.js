@@ -12,12 +12,16 @@ angular.module('goals').controller('ProjectController', function($scope, $routeP
     $scope.categories  = [];
 
     var assignData = function(result) {
-        $scope.goal           = result.goal;
-        $scope.project        = result.project;
-        $scope.subgoals       = result.subgoals;
-        $scope.notes          = result.notes;
-        $scope.milestones     = result.milestones;
-        $scope.categories     = result.categories;
+        if (result.error) {    
+            $scope.errorActions.errorRelocateToMain(result.error.message);
+        } else {
+            $scope.goal           = result.goal;
+            $scope.project        = result.project;
+            $scope.subgoals       = result.subgoals;
+            $scope.notes          = result.notes;
+            $scope.milestones     = result.milestones;
+            $scope.categories     = result.categories;
+        }
     };
 
     PageService.getProjectLanding($scope.id).then(assignData);

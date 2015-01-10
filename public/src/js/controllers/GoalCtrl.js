@@ -13,13 +13,17 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
     $scope.breadcrumbs = [];
 
     var assignData = function(result) {
-        $scope.goal        = result.goal;
-        $scope.project     = result.project;
-        $scope.subgoals    = result.subgoals;
-        $scope.notes       = result.notes;
-        $scope.milestones  = result.milestones;
-        $scope.categories  = result.categories;
-        $scope.breadcrumbs = result.breadcrumbs;
+        if (result.error) {    
+            $scope.errorActions.errorRelocateToProject($routeParams.projectId, result.error.message);
+        } else {
+            $scope.goal        = result.goal;
+            $scope.project     = result.project;
+            $scope.subgoals    = result.subgoals;
+            $scope.notes       = result.notes;
+            $scope.milestones  = result.milestones;
+            $scope.categories  = result.categories;
+            $scope.breadcrumbs = result.breadcrumbs;
+        }
     };
 
     PageService.getGoalLanding($scope.id).then(assignData);
