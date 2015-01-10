@@ -37,7 +37,7 @@
 		<tabset>
 			<tab heading="Subgoals"><goal-list></goal-list></tab>
 			<tab heading="Notes"><note-list></note-list></tab>
-			<tab heading="Description">{{ isGoal ? goal.description : project.description }}</tab>
+			<tab heading="Description"><p ng-bind-html="isGoal ? goal.description : project.description | nl2br"></p></tab>
 		</tabset>
 	</div>
 </div>
