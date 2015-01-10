@@ -1,4 +1,4 @@
-<div ng-repeat="note in notes" class="panel panel-default">
+<div ng-repeat="note in notes | orderBy: dateAdded" class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">{{ note.name }}</h3>
 	</div>

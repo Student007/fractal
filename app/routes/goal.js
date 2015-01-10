@@ -117,7 +117,22 @@ module.exports = function(app) {
                     });
                 });
             }, function(callback) {
-                Goal.remove({ parentId : id }, function(err, goal) {
+                async.parallel([ function(callback) {
+                    Goal.remove({ parentId : id }, function(err, goal) {
+                        if (err) callback(err);
+                        callback();
+                    });
+                }, function(callback) {
+                    Milestone.remove({ parentId : id }, function(err, milestone) {
+                        if (err) callback(err);
+                        callback();
+                    });
+                }, function(callback) {
+                    Note.remove({ parentId : id }, function(err, note) {
+                        if (err) callback(err);
+                        callback();
+                    });
+                }], function(err) {
                     if (err) callback(err);
                     callback();
                 });

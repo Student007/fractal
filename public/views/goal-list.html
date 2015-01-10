@@ -1,4 +1,4 @@
-<div ng-repeat="g in subgoals" class="panel panel-default">
+<div ng-repeat="g in subgoals | orderBy: 'goal.beginDate'"class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">{{ g.goal.name }}</h3>
 		</div>
@@ -6,7 +6,7 @@
 			<p><strong>Notes:</strong> {{ g.stats.numNotes }}</p>
 			<p><strong>SubGoals:</strong> {{ g.stats.numSubgoals }}</p>
 			<a href="/project/{{ project._id }}/goal/{{ g.goal._id }}">Open Goal »</a>
-			<button class="btn btn-primary" ng-click="updateGoalModal(g.goal)">Edit</button>
-			<button class="btn btn-danger" ng-click="deleteGoal(g.goal)">Delete</button>
+			<button class="btn btn-primary" ng-click="modals.updateGoalModal(g.goal)">Edit</button>
+			<button class="btn btn-danger" ng-click="modals.deleteGoalModal(g.goal)">Delete</button>
 		</div>
 </div>

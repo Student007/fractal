@@ -39,6 +39,6 @@
 <div class="modal-footer">
     <button ng-if="method == 'update'" class="btn btn-danger" ng-click="delete()">Delete</button>
     <button ng-if="method == 'create'" ng-disabled="goalform.$invalid" class="btn btn-primary" ng-click="ok()">Create</button>
-    <button ng-if="method == 'update'" ng-disabled="goalform.$invalid" class="btn btn-primary" ng-click="ok()">Update</button>
+    <button ng-if="method == 'update'" ng-disabled="goalform.$invalid || goalform.$pristine" class="btn btn-primary" ng-click="ok()">Update</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
