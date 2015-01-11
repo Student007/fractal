@@ -61,10 +61,6 @@ module.exports = function(app) {
 
     // create a milestone
     app.post('/api/milestones', function(req, res) {
-        if (req.body.parentId == "") {
-            delete req.body.parentId;
-        }
-
         var milestone = new Milestone(req.body);
 
         milestone.save(function(err, milestone) {

@@ -6,7 +6,7 @@
 			<p><strong>Notes:</strong> {{ g.stats.numNotes }}</p>
 			<p><strong>SubGoals:</strong> {{ g.stats.numSubgoals }}</p>
 			<a href="/project/{{ project._id }}/goal/{{ g.goal._id }}">Open Goal »</a>
-			<button class="btn btn-primary" ng-click="goalActions.updateGoal(g.goal)">Edit</button>
-			<button class="btn btn-danger" ng-click="goalActions.deleteGoal(g.goal)">Delete</button>
+			<button class="btn btn-primary" ng-click="goalActions.update(g.goal)">Edit</button>
+			<button class="btn btn-danger" ng-click="goalActions.delete(g.goal)">Delete</button>
 		</div>
 </div>

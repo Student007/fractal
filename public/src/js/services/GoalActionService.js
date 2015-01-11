@@ -12,7 +12,7 @@ angular.module('goals').factory('GoalActionService', function($http, $rootScope,
             $location.path(path);
         },
 
-        createGoal : function(projectId, parentId) {
+        create : function(projectId, parentId) {
             ModalService.createGoalModal(projectId, parentId, function(goal) {
                 GoalService.create(goal).then(function(result) {
                     if (result.data.success) {
@@ -23,7 +23,7 @@ angular.module('goals').factory('GoalActionService', function($http, $rootScope,
             });
         },
 
-        updateGoal : function(goal) {
+        update : function(goal) {
             var $this = this;
             ModalService.updateGoalModal(goal, function(goal) {
                 GoalService.update(goal).then(function(result) {
@@ -34,12 +34,12 @@ angular.module('goals').factory('GoalActionService', function($http, $rootScope,
                 });
             }, function(dismissal) {
                 if (dismissal === 'delete') {
-                    $this.deleteGoal(goal);
+                    $this.delete(goal);
                 }
             });
         },
 
-        deleteGoal : function(goal) {
+        delete : function(goal) {
             var $this = this;
             ModalService.confirmModal("Are you sure you want to delete this goal? <br /><br />All associated subgoals, notes, and milestones will be deleted as well.", function(proceed) {
                 if (proceed) {

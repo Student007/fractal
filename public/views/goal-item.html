@@ -9,23 +9,23 @@
 	</div>
 
 	<div class="btn-group" dropdown>
-	  <button type="button" class="btn btn-primary" ng-click="goalActions.createGoal(project._id, goal._id)">Create</button>
+	  <button type="button" class="btn btn-primary" ng-click="goalActions.create(project._id, goal._id)">Create</button>
 	  <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
 	    <span class="caret"></span>
 	    <span class="sr-only">Create</span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu">
-	    <li><a href ng-click="goalActions.createGoal(project._id, goal._id)">Goal</a></li>
-	    <li><a href="#">Note</a></li>
-	    <li><a href="#">Milestone</a></li>
+	    <li><a href ng-click="goalActions.create(project._id, goal._id)">Goal</a></li>
+	    <li><a href ng-click="noteActions.create(project._id, goal._id)">Note</a></li>
+	    <li><a href ng-click="milestoneActions.create(project._id, goal._id)">Milestone</a></li>
 	  </ul>
 	</div>
 	<div class="pull-right">
 		<div class="btn-group">
-			<button type="button" ng-if="isGoal" class="btn btn-primary" ng-click="goalActions.updateGoal(goal)">Edit</button>
+			<button type="button" ng-if="isGoal" class="btn btn-primary" ng-click="goalActions.update(goal)">Edit</button>
 		</div>
 		<div class="btn-group">
-			<button type="button" ng-if="isGoal" class="btn btn-danger" ng-click="goalActions.deleteGoal(goal)">Delete</button>
+			<button type="button" ng-if="isGoal" class="btn btn-danger" ng-click="goalActions.delete(goal)">Delete</button>
 		</div>
 	</div>
 
@@ -36,6 +36,7 @@
 	<div>
 		<tabset>
 			<tab heading="Subgoals"><goal-list></goal-list></tab>
+			<tab heading="Milestones"><milestone-list></milestone-list></tab>
 			<tab heading="Notes"><note-list></note-list></tab>
 			<tab heading="Description"><p ng-bind-html="isGoal ? goal.description : project.description | nl2br"></p></tab>
 		</tabset>

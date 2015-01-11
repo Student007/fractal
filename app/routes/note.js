@@ -59,10 +59,6 @@ module.exports = function(app) {
 
     // create a note
     app.post('/api/notes', function(req, res) {
-        if (req.body.parentId == "") {
-            delete req.body.parentId;
-        }
-
         var note = new Note(req.body);
 
         note.save(function(err, note) {

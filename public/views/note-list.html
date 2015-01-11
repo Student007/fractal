@@ -1,8 +1,10 @@
 <div ng-repeat="note in notes | orderBy: dateAdded" class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title">{{ note.name }}</h3>
+		<h3 class="panel-title">{{ note.name }} <span class="pull-right">{{ note.dateAdded | date: 'MM/dd/yyyy' }}</span></h3>
 	</div>
 	<div class="panel-body">
-		<p>{{ note.description }}</p>
+		<p ng-bind-html="note.description | nl2br"></p>
+		<button class="btn btn-primary" ng-click="noteActions.update(note)">Edit</button>
+		<button class="btn btn-danger" ng-click="noteActions.delete(note)">Delete</button>
 	</div>
 </div>

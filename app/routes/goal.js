@@ -68,14 +68,6 @@ module.exports = function(app) {
 
     // create a goal
     app.post('/api/goals', function(req, res) {
-        if (req.body.parentId == "") {
-            delete req.body.parentId;
-        }
-
-        if (req.body.categoryId == "") {
-            delete req.body.categoryId;
-        }
-
         var goal = new Goal(req.body);
 
         goal.save(function(err, goal) {
