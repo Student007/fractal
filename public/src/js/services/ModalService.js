@@ -11,7 +11,8 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                 controller: 'AlertModalController',
                 resolve: {
                     title: function() { return title; },
-                    message: function() { return message; }
+                    message: function() { return message; },
+
                 }
             });
         },
@@ -46,7 +47,7 @@ angular.module('goals').service('ModalService', function($modal, $location) {
         },
 
         // new goal modal
-        createGoalModal : function(projectId, parentId, callback) {
+        createGoalModal : function(projectId, parentId, categories, callback) {
             var $this = this;
 
             var modal = $modal.open({
@@ -64,7 +65,8 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                             projectId: projectId,
                             parentId: parentId
                         };
-                    }
+                    },
+                    categories: function() { return categories; }
                 }
             });
 
@@ -72,7 +74,7 @@ angular.module('goals').service('ModalService', function($modal, $location) {
         },
 
         // update goal modal
-        updateGoalModal : function(goal, updateCallback, dismissalCallback) {
+        updateGoalModal : function(goal, categories, updateCallback, dismissalCallback) {
             var $this = this;
 
             var modal = $modal.open({
@@ -80,7 +82,8 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                 controller: 'GoalModalController',
                 resolve: {
                     method: function() { return 'update'; },
-                    goal: function() { return JSON.parse(JSON.stringify(goal)); }
+                    goal: function() { return JSON.parse(JSON.stringify(goal)); },
+                    categories: function() { return categories; }
                 }
             });
 

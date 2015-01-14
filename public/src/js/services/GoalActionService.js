@@ -13,7 +13,7 @@ angular.module('goals').factory('GoalActionService', function($http, $rootScope,
         },
 
         create : function(projectId, parentId) {
-            ModalService.createGoalModal(projectId, parentId, function(goal) {
+            ModalService.createGoalModal(projectId, parentId, PageService.getCategories(), function(goal) {
                 GoalService.create(goal).then(function(result) {
                     if (result.data.success) {
                         PageService.reloadData();
@@ -25,7 +25,7 @@ angular.module('goals').factory('GoalActionService', function($http, $rootScope,
 
         update : function(goal) {
             var $this = this;
-            ModalService.updateGoalModal(goal, function(goal) {
+            ModalService.updateGoalModal(goal, PageService.getCategories(), function(goal) {
                 GoalService.update(goal).then(function(result) {
                     if (result.data.success) {
                         PageService.reloadData();

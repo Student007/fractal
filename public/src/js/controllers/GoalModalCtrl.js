@@ -1,8 +1,8 @@
 // public/src/js/GoalModalCtrl.js
 
-angular.module('goals').controller('GoalModalController', function($scope, $modalInstance, $filter, method, goal) {
+angular.module('goals').controller('GoalModalController', function($scope, $modalInstance, $filter, method, goal, categories) {
     $scope.method = method;
-    
+    $scope.categories = categories;
     $scope.goal = goal;
 
     if ($scope.goal.beginDate !== null) {
