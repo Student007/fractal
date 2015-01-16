@@ -3,7 +3,7 @@
 angular.module('goals').factory('MilestoneActionService', function($http, $rootScope, $location, ModalService, PageService, MilestoneService) {
     return {
         create : function(projectId, parentId) {
-            ModalService.createMilestoneModal(projectId, parentId, function(milestone) {
+            ModalService.createMilestoneModal(projectId, parentId, PageService.getCategories(), function(milestone) {
                 MilestoneService.create(milestone).then(function(result) {
                     if (result.data.success) {
                         PageService.reloadData();
@@ -15,7 +15,7 @@ angular.module('goals').factory('MilestoneActionService', function($http, $rootS
 
         update : function(milestone) {
             var $this = this;
-            ModalService.updateMilestoneModal(milestone, function(milestone) {
+            ModalService.updateMilestoneModal(milestone, PageService.getCategories(), function(milestone) {
                 MilestoneService.update(milestone).then(function(result) {
                     if (result.data.success) {
                         PageService.reloadData();

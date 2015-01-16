@@ -82,7 +82,7 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                 controller: 'GoalModalController',
                 resolve: {
                     method: function() { return 'update'; },
-                    goal: function() { return JSON.parse(JSON.stringify(goal)); },
+                    goal: function() { return angular.copy(goal); },
                     categories: function() { return categories; }
                 }
             });
@@ -122,7 +122,7 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                 controller: 'NoteModalController',
                 resolve: {
                     method: function() { return 'update'; },
-                    note: function() { return JSON.parse(JSON.stringify(note)); }
+                    note: function() { return angular.copy(note); }
                 }
             });
 
@@ -130,7 +130,7 @@ angular.module('goals').service('ModalService', function($modal, $location) {
         },
 
         // new milestone modal
-        createMilestoneModal : function(projectId, parentId, callback) {
+        createMilestoneModal : function(projectId, parentId, categories, callback) {
             var $this = this;
 
             var modal = $modal.open({
@@ -146,7 +146,8 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                             projectId: projectId,
                             parentId: parentId
                         };
-                    }
+                    },
+                    categories: function() { return categories; }
                 }
             });
 
@@ -154,7 +155,7 @@ angular.module('goals').service('ModalService', function($modal, $location) {
         },
 
         // update milestone modal
-        updateMilestoneModal : function(milestone, updateCallback, dismissalCallback) {
+        updateMilestoneModal : function(milestone, categories, updateCallback, dismissalCallback) {
             var $this = this;
 
             var modal = $modal.open({
@@ -162,7 +163,8 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                 controller: 'MilestoneModalController',
                 resolve: {
                     method: function() { return 'update'; },
-                    milestone: function() { return JSON.parse(JSON.stringify(milestone)); }
+                    milestone: function() { return angular.copy(milestone); },
+                    categories: function() { return categories; }
                 }
             });
 

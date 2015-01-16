@@ -1,8 +1,8 @@
 // public/src/js/MilestoneModalCtrl.js
 
-angular.module('goals').controller('MilestoneModalController', function($scope, $modalInstance, $filter, method, milestone) {
+angular.module('goals').controller('MilestoneModalController', function($scope, $modalInstance, $filter, method, milestone, categories) {
     $scope.method = method;
-    
+    $scope.categories = categories;
     $scope.milestone = milestone;
 
     if ($scope.milestone.date !== null) {
@@ -10,6 +10,7 @@ angular.module('goals').controller('MilestoneModalController', function($scope, 
     }
 
     $scope.ok = function () {
+        console.log($scope.milestone);
         $modalInstance.close($scope.milestone);
     };
 

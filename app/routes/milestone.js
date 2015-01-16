@@ -49,6 +49,7 @@ module.exports = function(app) {
                 milestone.date = req.body.date;
                 milestone.color = req.body.color;
                 milestone.percentComplete = req.body.percentComplete;
+                milestone.categoryId = req.body.categoryId;
                 milestone.parentId = req.body.parentId;
                 milestone.projectId = req.body.projectId;
 
