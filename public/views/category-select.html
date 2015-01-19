@@ -1,6 +1,0 @@
-<select class="form-control" ng-model="model">
-	<option value="" ng-selected="categoryId === null">No Category</option>
-    <option ng-repeat="category in categories" value="{{ category._id }}" ng-selected="goal.categoryId === category._id">
-      <div class="color-holder {{ category.color }}"></div> {{ category.name }}
-    </option>
-</select>

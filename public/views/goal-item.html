@@ -25,6 +25,9 @@
 			<button type="button" ng-if="isGoal" class="btn btn-primary" ng-click="goalActions.update(goal)">Edit</button>
 		</div>
 		<div class="btn-group">
+			<a ng-if="!isGoal" class="btn btn-primary" href="/project/{{ project._id }}/manage">Manage Project</a>
+		</div>
+		<div class="btn-group">
 			<button type="button" ng-if="isGoal" class="btn btn-danger" ng-click="goalActions.delete(goal)">Delete</button>
 		</div>
 	</div>

@@ -22,6 +22,12 @@ $routeProvider
         controller: 'ProjectController'
     })
 
+    // project edit
+    .when('/project/:projectId/manage', {
+        templateUrl: 'views/project-management.html',
+        controller: 'ProjectManagementController'
+    })
+
     // goal page
     .when('/project/:projectId/goal/:goalId', {
         templateUrl: 'views/goal-item.html',
