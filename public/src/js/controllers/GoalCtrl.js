@@ -23,7 +23,6 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
             $scope.milestones  = result.milestones;
             $scope.categories  = result.categories;
             $scope.breadcrumbs = result.breadcrumbs;
-            console.log($scope.categories);
         }
     };
 

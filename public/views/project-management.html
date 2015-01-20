@@ -1,0 +1,25 @@
+<!-- public/views/project-management.html -->
+
+<div class="project-management-page">
+
+	<div class="page-header">
+		<h3 ng-if="method === 'create'">New Project</h3>
+		<h3 ng-if="method === 'update'">Edit {{ displayName }}</h3>
+	</div>
+
+	<form name="goalform">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" required ng-model="project.name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea ng-model="project.description" class="form-control"></textarea>
+        </div>
+    </form>
+
+    <button type="button" class="btn btn-primary" ng-if="method === 'create'" ng-disabled="goalform.$invalid" ng-click="create()">Create</button>
+	<button type="button" class="btn btn-primary" ng-if="method === 'update'" ng-disabled="goalform.$invalid || goalform.$pristine" ng-click="update()">Update</button>
+	<button type="button" class="btn btn-primary" ng-click="goBack()">Cancel</button>
+	<button type="button" class="btn btn-danger" ng-if="method === 'update'" ng-click="delete()">Delete</button>
+</div>

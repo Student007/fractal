@@ -16,6 +16,14 @@ $routeProvider
         controller: 'ProjectController'
     })
 
+    .when('/project/new', {
+        templateUrl: 'views/project-management.html',
+        controller: 'ProjectManagementController',
+        resolve: {
+            method: function() { return 'create'; }
+        }
+    })
+
     // individual project page
     .when('/project/:projectId', {
         templateUrl: 'views/goal-item.html',
@@ -25,7 +33,10 @@ $routeProvider
     // project edit
     .when('/project/:projectId/manage', {
         templateUrl: 'views/project-management.html',
-        controller: 'ProjectManagementController'
+        controller: 'ProjectManagementController',
+        resolve: {
+            method: function() { return 'update'; }
+        }
     })
 
     // goal page
