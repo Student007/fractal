@@ -36,8 +36,7 @@ angular.module('goals').controller('ProjectManagementController', function($scop
         ProjectService.create($scope.project).then(function(result) {
             if (result.data.success) {
                 ModalService.alertModal('Success', 'Project created successfully!');
-                // $location.path('/project/' + result.data.success._id);
-                history.back();
+                $location.path('/project/' + result.data.success._id);
             }
         });
     };
@@ -46,7 +45,6 @@ angular.module('goals').controller('ProjectManagementController', function($scop
         ProjectService.update($scope.project).then(function(result) {
             if (result.data.success) {
                 ModalService.alertModal('Success', 'Project updated successfully!');
-                // $location.path('/project/' + result.data.success._id);
                 history.back();
             }
         });

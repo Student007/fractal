@@ -5,6 +5,8 @@
 </div>
 <div>
 	<h4>Projects:</h4>
+	<a class="btn btn-primary" href="/project/new">New Project</a>
+	<hr />
 	<div ng-repeat="p in projects | orderBy: 'p.name'"class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">{{ p.name }}</h3>
