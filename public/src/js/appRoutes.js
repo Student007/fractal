@@ -13,9 +13,10 @@ $routeProvider
     // project page
     .when('/projects', {
         templateUrl: 'views/project-list.html',
-        controller: 'ProjectController'
+        controller: 'ProjectListController'
     })
 
+    // new project
     .when('/project/new', {
         templateUrl: 'views/project-management.html',
         controller: 'ProjectManagementController',
@@ -24,7 +25,7 @@ $routeProvider
         }
     })
 
-    // individual project page
+    // project view
     .when('/project/:projectId', {
         templateUrl: 'views/goal-item.html',
         controller: 'ProjectController'

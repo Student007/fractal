@@ -36,7 +36,8 @@ angular.module('goals').controller('ProjectManagementController', function($scop
         ProjectService.create($scope.project).then(function(result) {
             if (result.data.success) {
                 ModalService.alertModal('Success', 'Project created successfully!');
-                $location.path('/project/' + result.data.success._id);
+                // $location.path('/project/' + result.data.success._id);
+                history.back();
             }
         });
     };
@@ -45,7 +46,8 @@ angular.module('goals').controller('ProjectManagementController', function($scop
         ProjectService.update($scope.project).then(function(result) {
             if (result.data.success) {
                 ModalService.alertModal('Success', 'Project updated successfully!');
-                $location.path('/project/' + result.data.success._id);
+                // $location.path('/project/' + result.data.success._id);
+                history.back();
             }
         });
     };
@@ -54,16 +56,12 @@ angular.module('goals').controller('ProjectManagementController', function($scop
         ModalService.confirmModal("Are you sure you want to delete this project?<br /><br />Everything associated with this project will be lost forever.", function(proceed) {
             if (proceed) {
                 ProjectService.delete($scope.project._id);
-                $location.path('/');
+                $location.path('/projects');
             }
         });
     };
 
     $scope.goBack = function() {
-        if ($scope.method === "create") {
-            $location.path('/');
-        } else {
-            $location.path('/project/' + $scope.project._id);
-        }
+        history.back();
     };
 });

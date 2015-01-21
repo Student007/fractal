@@ -1,7 +1,17 @@
 <!-- public/views/project-list.html -->
 
-<div class="jumbotron text-center">
-    <h1>Project Landing Page</h1>
-
-    <p>{{ tagline }}</p>
+<div>
+	<h1>Hello.</h1>
+</div>
+<div>
+	<h4>Projects:</h4>
+	<div ng-repeat="p in projects | orderBy: 'p.name'"class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">{{ p.name }}</h3>
+		</div>
+		<div class="panel-body">
+			<a href="/project/{{ p._id }}">Open Project »</a>
+			<a class="btn btn-primary" href="/project/{{ p._id }}/manage">Manage</a>
+		</div>
+	</div>
 </div>

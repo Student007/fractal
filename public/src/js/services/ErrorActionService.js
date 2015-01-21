@@ -14,7 +14,7 @@ angular.module('goals').factory('ErrorActionService', function($http, $rootScope
 
         errorRelocateToMain : function(message) {
             ModalService.awaitDismissAlertModal("Error", message, function() {
-                $location.path('/');
+                $location.path('/projects');
             });
         }, 
 
