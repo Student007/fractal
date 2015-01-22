@@ -129,16 +129,16 @@ angular.module('goals').service('ModalService', function($modal, $location) {
             modal.result.then(updateCallback, dismissalCallback);
         },
 
-        // new milestone modal
-        createMilestoneModal : function(projectId, parentId, categories, callback) {
+        // new category modal
+        createCategoryModal : function(projectId, callback) {
             var $this = this;
 
             var modal = $modal.open({
-                templateUrl: 'views/modals/milestone-modal.html',
-                controller: 'MilestoneModalController',
+                templateUrl: 'views/modals/category-modal.html',
+                controller: 'CategoryModalController',
                 resolve: {
                     method: function() { return 'create'; },
-                    milestone: function() { return {
+                    category: function() { return {
                             name: null,
                             date: new Date(),
                             percentComplete: 0,
@@ -146,29 +146,28 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                             projectId: projectId,
                             parentId: parentId
                         };
-                    },
-                    categories: function() { return categories; }
+                    }
                 }
             });
 
             modal.result.then(callback);
         },
 
-        // update milestone modal
-        updateMilestoneModal : function(milestone, categories, updateCallback, dismissalCallback) {
+        // update category modal
+        updateCategoryModal : function(category, updateCallback, dismissalCallback) {
             var $this = this;
 
             var modal = $modal.open({
-                templateUrl: 'views/modals/milestone-modal.html',
-                controller: 'MilestoneModalController',
+                templateUrl: 'views/modals/category-modal.html',
+                controller: 'CategoryModalController',
                 resolve: {
                     method: function() { return 'update'; },
-                    milestone: function() { return angular.copy(milestone); },
+                    category: function() { return angular.copy(category); },
                     categories: function() { return categories; }
                 }
             });
 
             modal.result.then(updateCallback, dismissalCallback);
-        },
+        }
     };
 });

@@ -44,6 +44,12 @@ $routeProvider
     .when('/project/:projectId/goal/:goalId', {
         templateUrl: 'views/goal-item.html',
         controller: 'GoalController'
+    })
+
+    // category view/edit page
+    .when('/project/:projectId/categories', {
+        templateUrl: 'views/categories.html',
+        controller: 'CategoryController'
     });
 
 $locationProvider.html5Mode(true);
