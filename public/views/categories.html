@@ -1,0 +1,20 @@
+<!-- public/views/categories.html -->
+
+<div>
+    <h3>Categories</h3>
+</div>
+<div>
+    <button class="btn btn-primary" ng-click="create()">New Category</button>
+    <hr />
+    <div ng-repeat="c in categories | orderBy: 'c.name'"class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ c.name }}</h3>
+        </div>
+        <div class="panel-body">
+            {{ c.description }}<br />
+            {{ c.color }}<br />
+            <button class="btn btn-primary" ng-click="update(c)">Edit</button>
+            <button class="btn btn-danger" ng-click="delete(c)">Delete</button>
+        </div>
+    </div>
+</div>
