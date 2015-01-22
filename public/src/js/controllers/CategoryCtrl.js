@@ -26,16 +26,18 @@ angular.module('goals').controller('CategoryController', function($scope, $route
     };
 
     $scope.update = function(category) {
-        CategoryService.update(category).then(function(result) {
-            if (result.data.success) {
-                ModalService.alertModal('Success', 'Category updated successfully!');
-                CategoryService.getByProject($scope.id).then(assignData);
-            }
+        ModalService.updateCategoryModal($scope.id, function(category) {
+            CategoryService.update(category).then(function(result) {
+                if (result.data.success) {
+                    ModalService.alertModal('Success', 'Category updated successfully!');
+                    CategoryService.getByProject($scope.id).then(assignData);
+                }
+            });
         });
     };
 
     $scope.delete = function(category) {
-        ModalService.confirmModal("Are you sure you want to delete this project?<br /><br />Everything associated with this project will be lost forever.", function(proceed) {
+        ModalService.confirmModal("Are you sure you want to delete this category?", function(proceed) {
             if (proceed) {
                 CategoryService.delete(category._id);
                 CategoryService.getByProject($scope.id).then(assignData);

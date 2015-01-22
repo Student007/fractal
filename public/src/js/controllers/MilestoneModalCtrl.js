@@ -10,7 +10,6 @@ angular.module('goals').controller('MilestoneModalController', function($scope, 
     }
 
     $scope.ok = function () {
-        console.log($scope.milestone);
         $modalInstance.close($scope.milestone);
     };
 
