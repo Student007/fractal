@@ -140,11 +140,9 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                     method: function() { return 'create'; },
                     category: function() { return {
                             name: null,
-                            date: new Date(),
-                            percentComplete: 0,
-                            categoryId: null,
-                            projectId: projectId,
-                            parentId: parentId
+                            description: null,
+                            color: null,
+                            projectId: projectId
                         };
                     }
                 }
@@ -162,8 +160,7 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                 controller: 'CategoryModalController',
                 resolve: {
                     method: function() { return 'update'; },
-                    category: function() { return angular.copy(category); },
-                    categories: function() { return categories; }
+                    category: function() { return angular.copy(category); }
                 }
             });
 
