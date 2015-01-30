@@ -36,17 +36,12 @@
 			<button type="button" class="btn btn-danger" ng-click="goalActions.delete(goal)">Delete</button>
 		</div>
 	</div>
-
-	<div class="jumbotron text-center">
-	    <h1>Timeline</h1>
-	</div>
-
 	<div>
-		<tabset>
-			<tab heading="Subgoals"><goal-list></goal-list></tab>
-			<tab heading="Milestones"><milestone-list></milestone-list></tab>
-			<tab heading="Notes"><note-list></note-list></tab>
-			<tab heading="Description"><p ng-bind-html="isGoal ? goal.description : project.description | nl2br"></p></tab>
-		</tabset>
+		<h3>Goals</h2>
+		<goal-list></goal-list>
+		<h3>Milestones</h2>
+		<milestone-list></milestone-list>
+		<h3>Notes</h2>		
+		<note-list></note-list>
 	</div>
 </div>
