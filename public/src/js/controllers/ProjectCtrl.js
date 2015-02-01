@@ -11,7 +11,7 @@ angular.module('goals').controller('ProjectController', function($scope, $routeP
     $scope.milestones  = [];
     $scope.categories  = [];
 
-    $scope.timeline      = new TimelineService($scope.goal.beginDate, 
+    $scope.timeline    = new TimelineService($scope.goal.beginDate, 
         $scope.goal.endDate, $scope.subgoals);
     $scope.timelineSubgoals = $scope.timeline.appendSubgoalTimelines();
 
@@ -25,7 +25,7 @@ angular.module('goals').controller('ProjectController', function($scope, $routeP
             $scope.notes      = result.notes;
             $scope.milestones = result.milestones;
             $scope.categories = result.categories;
-            $scope.timeline.setParams($scope.goal.beginDate, 
+            $scope.timeline   = new TimelineService($scope.goal.beginDate, 
                 $scope.goal.endDate, $scope.subgoals);
             $scope.timelineSubgoals = $scope.timeline.appendSubgoalTimelines();
         }
