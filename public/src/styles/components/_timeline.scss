@@ -3,13 +3,13 @@
 .timeline-item {
 	.titem-header {
 		position: relative;
-		border: 1px solid #f0f0f0;
+		border: 1px solid #dddddd;
 	}
 
 	.titem-timeline-holder {
 		height: 45px;
 		width: 100%;
-		background: #f8f8f8;
+		background: #eeeeee;
 	}
 
 	.titem-pushbar {
@@ -38,9 +38,9 @@
 	}
 
 	.titem-body {
-		border-left: 1px solid #f0f0f0;
-		border-bottom: 1px solid #f0f0f0;
-		border-right: 1px solid #f0f0f0;
+		border-left: 1px solid #dddddd;
+		border-bottom: 1px solid #dddddd;
+		border-right: 1px solid #dddddd;
 		padding: 15px;
 	}
 }

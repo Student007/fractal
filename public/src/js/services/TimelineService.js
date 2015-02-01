@@ -7,8 +7,6 @@ angular.module('goals').factory('TimelineService', function() {
         this.end          = (end !== undefined && end !== null ? end : this.subgoalRange.latest);
         this.days         = getNumDays(this.begin,this.end);
 
-        console.log("subgoals: " + this.subgoals);
-        console.log("subgoalRange: " + this.subgoalRange);
         console.log("begin: " + this.begin);
         console.log("end: " + this.end);
         console.log("days: " + this.days);
@@ -29,19 +27,25 @@ angular.module('goals').factory('TimelineService', function() {
                 fadeBegin: false,
                 fadeEnd: false
             };
-            var itemBegin    = getProperStart(begin);
-            var itemEnd      = getProperEnd(end);
+            var itemBegin    = getProperStart(this.begin, begin);
+            var itemEnd      = getProperEnd(this.end, end);
             var itemDays     = getNumDays(itemBegin, itemEnd);
             var itemDaysPush = getNumDays(this.begin, itemBegin);
 
-            console.log("itemBegin: " + itemBegin);
-            console.log("itemEnd: " + itemEnd);
-            console.log("itemDays: " + itemDays);
-            console.log("itemDaysPush: " + itemDaysPush);
+            // console.log("itemBegin: " + itemBegin);
+            // console.log("itemEnd: " + itemEnd);
+            // console.log("itemDays: " + itemDays);
+            // console.log("itemDaysPush: " + itemDaysPush);
 
-            if ((this.begin && this.end) && (itemBegin && itemEnd)) {
+            if (this.begin && this.end) {
                 results.push = Math.round((itemDaysPush / this.days) * 100); //push %
                 results.size = Math.round((itemDays / this.days) * 100); // size %
+
+                if ((results.push + results.size) > 100) {
+                    var overflow = 100 - (results.push + results.size);
+                    console.log(overflow);
+                    results.size = results.size - overflow;
+                }
             } else {
                 results.push = 0;
                 results.size = 100;
@@ -70,6 +74,7 @@ angular.module('goals').factory('TimelineService', function() {
         this.appendSubgoalTimelines = function() {
             timelineSubgoals = angular.copy(subgoals);
             for (var s in timelineSubgoals) {
+                console.log(timelineSubgoals[s].goal.name);
                 timelineSubgoals[s].timeline = this.getGoalTimeline(timelineSubgoals[s].goal.beginDate, 
                     timelineSubgoals[s].goal.endDate);
             }
@@ -89,32 +94,33 @@ angular.module('goals').factory('TimelineService', function() {
         }
 
         // get a start date respective to the visual timeline
-        function getProperStart(begin) {
-            properBegin = begin;
+        function getProperStart(masterBegin, beginDate) {
+            properBegin = beginDate;
 
-            if (begin === null || begin === undefined) {
-                properBegin = this.begin;
+            if (beginDate === null || beginDate === undefined) {
+                properBegin = masterBegin;
             } else {
-                if (begin < this.begin) {
-                    properBegin = this.begin;
+                if (beginDate < masterBegin) {
+                    properBegin = masterBegin;
                 } 
             }
-            console.log('this.begin: ' + this.begin);
+            console.log('this.begin: ' + masterBegin);
             console.log('properBegin: ' + properBegin);
             return properBegin;
         }
 
-        function getProperEnd(end) {
-            properEnd = end;
+        function getProperEnd(masterEnd, endDate) {
+            properEnd = endDate;
 
-            if (end === null || end === undefined) {
-                properEnd = this.end;
+            if (endDate === null || endDate === undefined) {
+                properEnd = masterEnd;
             } else {
-                if (end > this.end) {
-                    properEnd = this.end;
+                if (endDate > masterEnd) {
+                    properEnd = masterEnd;
                 }
             }
-
+            console.log('this.end: ' + masterEnd);
+            console.log('properEnd: ' + properEnd);
             return properEnd;
         }
 
@@ -132,7 +138,6 @@ angular.module('goals').factory('TimelineService', function() {
                 for (var s in subgoals) {
                     if (subgoals[s].goal.beginDate !== null) {
                         var curGoalStartDate = new Date(subgoals[s].goal.beginDate);
-                        console.log("testing start date: " + curGoalStartDate);
                         if (earliest === null) {
                             earliest = curGoalStartDate;
                         } else {
@@ -152,7 +157,6 @@ angular.module('goals').factory('TimelineService', function() {
 
                     if (subgoals[s].goal.endDate !== null) {
                         var curGoalEndDate = new Date(subgoals[s].goal.endDate);
-                        console.log("testing end date: " + curGoalEndDate);
                         if (latest === null) {
                             latest = curGoalEndDate;
                         } else {
