@@ -165,6 +165,48 @@ angular.module('goals').service('ModalService', function($modal, $location) {
             });
 
             modal.result.then(updateCallback, dismissalCallback);
+        },
+
+        // new milestone modal
+        createMilestoneModal : function(projectId, parentId, categories, callback) {
+            var $this = this;
+
+            var modal = $modal.open({
+                templateUrl: 'views/modals/milestone-modal.html',
+                controller: 'MilestoneModalController',
+                resolve: {
+                    method: function() { return 'create'; },
+                    milestone: function() { return {
+                            name: null,
+                            date: new Date(),
+                            percentComplete: 0,
+                            categoryId: null,
+                            projectId: projectId,
+                            parentId: parentId
+                        };
+                    },
+                    categories: function() { return categories; }
+                }
+            });
+
+            modal.result.then(callback);
+        },
+
+        // update milestone modal
+        updateMilestoneModal : function(milestone, categories, updateCallback, dismissalCallback) {
+            var $this = this;
+
+            var modal = $modal.open({
+                templateUrl: 'views/modals/milestone-modal.html',
+                controller: 'MilestoneModalController',
+                resolve: {
+                    method: function() { return 'update'; },
+                    milestone: function() { return angular.copy(milestone); },
+                    categories: function() { return categories; }
+                }
+            });
+
+            modal.result.then(updateCallback, dismissalCallback);
         }
     };
 });
