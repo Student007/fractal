@@ -3,8 +3,8 @@ angular.module('goals').factory('TimelineService', function() {
     return function(begin, end, subgoals) {
         this.subgoals     = subgoals;
         this.subgoalRange = getSubgoalRange();
-        this.begin        = (begin !== undefined && begin !== null ? begin : this.subgoalRange.earliest);
-        this.end          = (end !== undefined && end !== null ? end : this.subgoalRange.latest);
+        this.begin        = this.subgoalRange.earliest; // (begin !== undefined && begin !== null ? begin : this.subgoalRange.earliest);
+        this.end          = this.subgoalRange.latest; // (end !== undefined && end !== null ? end : this.subgoalRange.latest);
         this.days         = getNumDays(this.begin,this.end);
 
         console.log("begin: " + this.begin);
@@ -27,8 +27,8 @@ angular.module('goals').factory('TimelineService', function() {
                 fadeBegin: false,
                 fadeEnd: false
             };
-            var itemBegin    = getProperStart(this.begin, begin);
-            var itemEnd      = getProperEnd(this.end, end);
+            var itemBegin    = getProperStart(this.begin, this.end, begin);
+            var itemEnd      = getProperEnd(this.begin, this.end, end);
             var itemDays     = getNumDays(itemBegin, itemEnd);
             var itemDaysPush = getNumDays(this.begin, itemBegin);
 
@@ -42,8 +42,9 @@ angular.module('goals').factory('TimelineService', function() {
                 results.size = Math.round((itemDays / this.days) * 100); // size %
 
                 if ((results.push + results.size) > 100) {
-                    var overflow = 100 - (results.push + results.size);
-                    console.log(overflow);
+                    var overflow = (results.push + results.size) - 100;
+                    console.log(results);
+                    console.log('overflow ' + overflow);
                     results.size = results.size - overflow;
                 }
             } else {
@@ -94,7 +95,7 @@ angular.module('goals').factory('TimelineService', function() {
         }
 
         // get a start date respective to the visual timeline
-        function getProperStart(masterBegin, beginDate) {
+        function getProperStart(masterBegin, masterEnd, beginDate) {
             properBegin = beginDate;
 
             if (beginDate === null || beginDate === undefined) {
@@ -103,13 +104,17 @@ angular.module('goals').factory('TimelineService', function() {
                 if (beginDate < masterBegin) {
                     properBegin = masterBegin;
                 } 
+
+                if (beginDate > masterEnd) {
+                    properBegin = masterEnd;
+                }
             }
             console.log('this.begin: ' + masterBegin);
             console.log('properBegin: ' + properBegin);
             return properBegin;
         }
 
-        function getProperEnd(masterEnd, endDate) {
+        function getProperEnd(masterBegin, masterEnd, endDate) {
             properEnd = endDate;
 
             if (endDate === null || endDate === undefined) {
@@ -117,6 +122,10 @@ angular.module('goals').factory('TimelineService', function() {
             } else {
                 if (endDate > masterEnd) {
                     properEnd = masterEnd;
+                }
+
+                if (endDate < masterBegin) {
+                    properEnd = masterBegin;
                 }
             }
             console.log('this.end: ' + masterEnd);

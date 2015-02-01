@@ -1,16 +1,20 @@
 // public/src/js/controllers/GoalCtrl.js
 
-angular.module('goals').controller('GoalController', function($scope, $routeParams, PageService) {
+angular.module('goals').controller('GoalController', function($scope, $routeParams, PageService, TimelineService) {
     $scope.id          = $routeParams.goalId;
     $scope.isGoal      = true;
        
-    $scope.goal        = null;
+    $scope.goal        = {};
     $scope.project     = null;
     $scope.subgoals    = [];
     $scope.notes       = [];
     $scope.milestones  = [];
     $scope.categories  = [];
     $scope.breadcrumbs = [];
+
+    $scope.timeline    = new TimelineService($scope.goal.beginDate, 
+        $scope.goal.endDate, $scope.subgoals);
+    $scope.timelineSubgoals = $scope.timeline.appendSubgoalTimelines();
 
     var assignData = function(result) {
         if (result.error) {    
@@ -23,6 +27,10 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
             $scope.milestones  = result.milestones;
             $scope.categories  = result.categories;
             $scope.breadcrumbs = result.breadcrumbs;
+
+            $scope.timeline    = new TimelineService($scope.goal.beginDate, 
+                $scope.goal.endDate, $scope.subgoals);
+            $scope.timelineSubgoals = $scope.timeline.appendSubgoalTimelines();
         }
     };
 

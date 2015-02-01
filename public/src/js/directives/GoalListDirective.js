@@ -3,6 +3,6 @@
 angular.module('goals').directive('goalList', function() {
 	return {
 		restrict: 'AE',
-		templateUrl: '../../views/goal-list.html'
+		templateUrl: '../../views/goal-list.html',
 	};
 });
