@@ -6,4 +6,22 @@ angular.module('goals').controller('MainController', function($scope, $location,
     $scope.goalActions      = GoalActionService;
     $scope.noteActions      = NoteActionService;
     $scope.milestoneActions = MilestoneActionService;
+
+    $scope.barEdit = function(goal, e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        $scope.goalActions.update(goal);
+    };
+
+    $scope.barGoTo = function(loc, e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        $location.path(loc);
+    };
 });

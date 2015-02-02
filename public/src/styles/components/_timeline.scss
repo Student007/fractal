@@ -53,8 +53,27 @@ $bar-height: 40px;
 		line-height: $bar-height;
 		font-size: 14px;
 		
-		span {
-			padding: 0 15px 0 5px;
+		.titem-header-date {
+			padding: 0 10px 0 15px;
+		}
+
+		.fa {
+			padding-left: 4px;
+			padding-right: 10px;
+		}
+	}
+
+	.titem-header-actions {
+		padding: 0;
+
+		a {
+			color: inherit;
+			padding: 12px !important;
+		}
+
+		a:hover {
+			text-decoration: none;
+			background: rgba(150,150,150,0.2);
 		}
 	}
 
