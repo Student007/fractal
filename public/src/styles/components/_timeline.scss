@@ -1,9 +1,16 @@
 // components/_timeline.scss
 
 .timeline-item {
+
 	.titem-header {
 		position: relative;
-		border: 1px solid #dddddd;
+		border-left: 1px solid #dddddd;
+		border-right: 1px solid #dddddd;
+		border-bottom: 1px solid #dddddd;
+	}
+
+	.titem-header.first { 
+		border-top: 1px solid #dddddd;
 	}
 
 	.titem-timeline-holder {
@@ -28,9 +35,11 @@
 	}
 
 	.titem-title {
-		display: inline;
-		top: 15px;
+		display: inline-block;
+		top: 0px;
+		line-height: 45px;
 		padding-left: 15px;
+		width: 75%;
 		margin: 0;
 		font-size: 16px;
 		color: $default-font-color;
@@ -42,5 +51,25 @@
 		border-bottom: 1px solid #dddddd;
 		border-right: 1px solid #dddddd;
 		padding: 15px;
+	}
+
+	.panel-heading {
+		color: inherit;
+		background: inherit;
+		border: 0;
+		border-radius: 0;
+		padding: 0;
+	}
+
+	&.panel {
+		margin: 0;
+		padding: 0;
+		border-radius: 0;
+		border: 0;
+	}
+
+	.panel-body {
+		padding: 0;
+		border: 0 !important;
 	}
 }
