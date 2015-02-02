@@ -41,7 +41,8 @@ module.exports = function(app) {
                     async.forEach(goals, function(currentGoal, callback) {
                         var stats = {
                             numNotes: 0,
-                            numSubgoals: 0
+                            numSubgoals: 0,
+                            numMilestones: 0
                         };
 
                         async.parallel([
@@ -54,6 +55,12 @@ module.exports = function(app) {
                         function(callback) {
                             Goal.count({ parentId: currentGoal._id }, function(err, count) {
                                 stats.numSubgoals = count;
+                                callback(err);
+                            });
+                        },
+                        function(callback) {
+                            Milestone.count({ parentId: currentGoal._id }, function(err, count) {
+                                stats.numMilestones = count;
                                 callback(err);
                             });
                         }], function(err) {
@@ -137,7 +144,8 @@ module.exports = function(app) {
                         async.forEach(goals, function(currentGoal, callback) {
                             var stats = {
                                 numNotes: 0,
-                                numSubgoals: 0
+                                numSubgoals: 0,
+                                numMilestones: 0
                             };
 
                             async.parallel([
@@ -150,6 +158,12 @@ module.exports = function(app) {
                             function(callback) {
                                 Goal.count({ parentId: currentGoal._id }, function(err, count) {
                                     stats.numSubgoals = count;
+                                    callback(err);
+                                });
+                            },
+                            function(callback) {
+                                Milestone.count({ parentId: currentGoal._id }, function(err, count) {
+                                    stats.numMilestones = count;
                                     callback(err);
                                 });
                             }], function(err) {

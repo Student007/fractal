@@ -1,4 +1,5 @@
 // components/_timeline.scss
+$bar-height: 40px;
 
 .timeline-item {
 
@@ -14,7 +15,7 @@
 	}
 
 	.titem-timeline-holder {
-		height: 45px;
+		height: $bar-height;
 		width: 100%;
 		background: #eeeeee;
 	}
@@ -34,16 +35,34 @@
 		display: inline-block;
 	}
 
-	.titem-title {
+	.titem-header-data {
 		display: inline-block;
 		top: 0px;
-		line-height: 45px;
 		padding-left: 15px;
-		width: 75%;
+		padding-right: 15px;
+		height: 100%;
+		width: 100%;
 		margin: 0;
 		font-size: 16px;
 		color: $default-font-color;
 		position: absolute;
+	}
+
+	.titem-header-ctrls {
+		display: inline-block;
+		line-height: $bar-height;
+		font-size: 14px;
+		
+		span {
+			padding: 0 15px 0 5px;
+		}
+	}
+
+	.titem-title {
+		font-size: inherit;
+		line-height: $bar-height;
+		margin: 0;
+		float: left;
 	}
 
 	.titem-body {

@@ -6,7 +6,15 @@
 					<div class="titem-pushbar" style="width: {{ g.timeline.push }}%;" ng-hide="g.timeline.push <= 0"></div>
 					<div class="titem-bar" style="width: {{ g.timeline.size }}%;"></div>
 				</div>
-				<h3 class="titem-title">{{ g.goal.name }}</h3>
+				<div class="titem-header-data">
+					<h3 class="titem-title">{{ g.goal.name }}</h3>
+					<div class="titem-header-ctrls pull-right">
+						<!-- {{ g.stats.numSubgoals }}<span class="fa fa-copy"></span>
+						{{ g.stats.numNotes }}<span class="fa fa-comments"></span>
+						{{ g.stats.numMilestones }}<span class="fa fa-flag"></span> -->
+						<span class="titem-header-date" ng-show="g.goal.beginDate && g.goal.endDate">{{ g.goal.beginDate | date:'MM/dd/yyyy'}} - {{ g.goal.endDate | date:'MM/dd/yyyy'}}</span>
+					</div>
+				</div>
 			</div>
 		</accordion-heading>
 		<div class="titem-body">
