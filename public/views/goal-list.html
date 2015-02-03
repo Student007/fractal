@@ -35,7 +35,11 @@
 						<tab-heading><span class="fa fa-copy"></span> Subgoals</tab-heading>
 						<div class="text-right tab-content-header"><a href="#"><span class="fa fa-plus"></span> Add New</a></div>
 						<div class="tab-content-body">
-							<div ng-repeat="subg in g.subgoals | orderBy: 'beginDate'">{{ subg.name }}</div>
+							<div ng-repeat="subg in g.subgoals | orderBy: 'beginDate'">
+								<div class="subg-category"></div>
+								<h4>{{ subg.name }}</h4>
+								<span class="fa fa-tag"></span><span ng-bind="getCategoryName(subg.categoryId)"></span>
+							</div>
 						</div>
 					</tab>
 					<tab>

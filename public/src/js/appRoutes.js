@@ -28,7 +28,10 @@ $routeProvider
     // project view
     .when('/project/:projectId', {
         templateUrl: 'views/goal-item.html',
-        controller: 'ProjectController'
+        controller: 'GoalController',
+        resolve: {
+            isGoal: function() { return false;}
+        }
     })
 
     // project edit
@@ -43,7 +46,10 @@ $routeProvider
     // goal page
     .when('/project/:projectId/goal/:goalId', {
         templateUrl: 'views/goal-item.html',
-        controller: 'GoalController'
+        controller: 'GoalController',
+        resolve: {
+            isGoal: function() { return true;}
+        }
     })
 
     // category view/edit page

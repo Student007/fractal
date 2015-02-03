@@ -1,12 +1,12 @@
 // public/src/js/controllers/GoalCtrl.js
 
-angular.module('goals').controller('GoalController', function($scope, $routeParams, 
-    PageService, GoalService, NoteService, MilestoneService, TimelineService) {
+angular.module('goals').controller('GoalController', function($scope, $routeParams, $filter,
+    PageService, GoalService, NoteService, MilestoneService, TimelineService, isGoal) {
 
-    $scope.id          = $routeParams.goalId;
-    $scope.isGoal      = true;
+    $scope.isGoal      = isGoal;
+    $scope.id          = ( isGoal ? $routeParams.goalId : $routeParams.projectId);
        
-    $scope.goal        = {};
+    $scope.goal        = { _id : null};
     $scope.project     = null;
     $scope.subgoals    = [];
     $scope.notes       = [];
@@ -18,9 +18,31 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
         $scope.goal.endDate, $scope.subgoals);
     $scope.timelineSubgoals = $scope.timeline.appendSubgoalTimelines();
 
+    $scope.getCategoryName = function(id) {
+        var found = $filter('filter')($scope.categories, {_id: id}, true);
+        if (found.length) {
+            return found[0].name;
+        } else {
+            return 'None';
+        }
+    };
+
+    $scope.getCategoryColor = function(id) {
+        var found = $filter('filter')($scope.categories, {_id: id}, true);
+        if (found.length) {
+            return found[0].color;
+        } else {
+            return 'category-default';
+        }
+    };
+
     var assignData = function(result) {
-        if (result.error) {    
-            $scope.errorActions.errorRelocateToProject($routeParams.projectId, result.error.message);
+        if (result.error) {
+            if ($scope.isGoal) {    
+                $scope.errorActions.errorRelocateToProject($routeParams.projectId, result.error.message);
+            } else {
+                $scope.errorActions.errorRelocateToMain(result.error.message);
+            }
         } else {
             $scope.goal        = result.goal;
             $scope.project     = result.project;
@@ -51,7 +73,12 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
         }
     };
 
-    PageService.getGoalLanding($scope.id).then(assignData);
+    if ($scope.isGoal) {
+        PageService.getGoalLanding($scope.id).then(assignData);
+    } else {
+        PageService.getProjectLanding($scope.id).then(assignData);
+    }
+
     $scope.$on('data-reload', function(event, result) { 
         assignData(result);
     });
