@@ -27,3 +27,14 @@ a {
 		text-decoration: none;
 	}
 }
+
+a.inverted {
+	color: $primary-app-color;
+
+	&:hover,
+	&:active,
+	&:focus {
+		color: $secondary-app-color;
+		text-decoration: none;
+	}
+}

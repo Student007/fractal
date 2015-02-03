@@ -190,10 +190,18 @@ angular.module('goals').factory('TimelineService', function() {
                     }
                 }
 
+                if (earliestEnd !== null && earliest === null) {
+                    earliest = earliestEnd;
+                }
+
                 if (latestStart !== null && latest !== null) {
                     if (latestStart > latest) {
                         latest = latestStart;
                     }
+                }
+
+                if (latestStart !== null && latest === null) {
+                    latest = latestStart;
                 }
 
                 console.log("earliest: " + earliest);

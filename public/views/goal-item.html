@@ -38,7 +38,12 @@
 	</div>
 	<div>
 		<h3>Goals Timeline</h2>
-		<goal-list></goal-list>
+		<div ng-if="subgoals.length > 0">
+			<goal-list></goal-list>
+		</div>
+		<div ng-if="subgoals.length <= 0" class="text-center empty-notice">
+			You don't have any goals here yet. Do you want to <a href="#" class="inverted">add one?</a>
+		</div>
 		<h3>Milestones Timeline</h2>
 		<milestone-list></milestone-list>
 		<h3>Notes</h2>		

@@ -8,7 +8,7 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
        
     $scope.goal        = { _id : null};
     $scope.project     = null;
-    $scope.subgoals    = [];
+    $scope.subgoals    = null;
     $scope.notes       = [];
     $scope.milestones  = [];
     $scope.categories  = [];
