@@ -1,7 +1,8 @@
 /* common.scss */
 
 $default-font-color: #494848;
-
+$primary-app-color: #0caf24;
+$secondary-app-color: #046312;
 
 .navbar {
 	margin-bottom: 0;
@@ -12,4 +13,17 @@ $default-font-color: #494848;
 	border-radius: 0;
 }
 
+.btn-primary {
+	@include button-variant(white, $primary-app-color, darken($primary-app-color, 4));
+}
 
+a {
+	color: $secondary-app-color;
+
+	&:hover,
+	&:active,
+	&:focus {
+		color: $primary-app-color;
+		text-decoration: none;
+	}
+}

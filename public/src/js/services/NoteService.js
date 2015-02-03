@@ -5,6 +5,10 @@ angular.module('goals').factory('NoteService', ['$http', function($http) {
             return $http.get('/api/notes');
         },
 
+        getByParent : function(id) {
+            return $http.get('/api/notes/by-parent/' + id);
+        },
+
         create : function(noteData) {
             return $http.post('/api/notes', noteData);
         },

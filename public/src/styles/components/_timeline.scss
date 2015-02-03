@@ -68,6 +68,7 @@ $bar-height: 40px;
 
 		a {
 			color: inherit;
+			font-size: 16px;
 			padding: 12px !important;
 		}
 
@@ -91,11 +92,48 @@ $bar-height: 40px;
 	}
 
 	.titem-body-header {
-		
+		padding: 10px 15px;
+		font-size: 12px;
+		background: #f8f8f8;
+
+		.fa {
+			margin-right: 10px;
+			margin-left: 4px;
+		}
+
+		.tag {
+			margin-right: 4px;
+			margin-left: 0;
+		}
 	}
 
 	.titem-body-content {
 		padding: 15px;
+
+		.nav {
+			margin-bottom: 0;
+		}
+
+		li a {
+			color: #494848;
+			padding: 8px 8px;
+		}
+	}
+
+	.tab-content {
+		border-left: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
+	}
+
+	.tab-content-header {
+		padding: 10px;
+	}
+
+	.tab-content-body {
+		padding: 10px;
+		background: #eeeeee;
+		min-height: 200px;
 	}
 
 	.panel-heading {

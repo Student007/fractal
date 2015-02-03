@@ -5,6 +5,10 @@ angular.module('goals').factory('GoalService', ['$http', function($http) {
             return $http.get('/api/goals');
         },
 
+        getByParent : function(id) {
+            return $http.get('/api/goals/by-parent/' + id);
+        },
+
         create : function(goalData) {
             return $http.post('/api/goals', goalData);
         },

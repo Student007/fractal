@@ -9,9 +9,6 @@
 				<div class="titem-header-data">
 					<h3 class="titem-title">{{ g.goal.name }}</h3>
 					<div class="titem-header-ctrls pull-right">
-						<!-- {{ g.stats.numSubgoals }}<span class="fa fa-copy"></span>
-						{{ g.stats.numNotes }}<span class="fa fa-comments"></span>
-						{{ g.stats.numMilestones }}<span class="fa fa-flag"></span> -->
 						<span class="titem-header-date" ng-show="g.goal.beginDate && g.goal.endDate"><strong>{{ g.goal.beginDate | date:'MM/dd/yyyy'}}</strong> to <strong>{{ g.goal.endDate | date:'MM/dd/yyyy'}}</strong></span>
 						<span class="titem-header-actions"><a class="fa fa-edit" ng-click="barEdit(g.goal, $event)"></a><a class="fa fa-external-link" ng-click="barGoTo('/project/' + project._id + '/goal/' + g.goal._id, $event)"></a></span>
 					</div>
@@ -19,10 +16,40 @@
 			</div>
 		</accordion-heading>
 		<div class="titem-body">
-			<div class="titem-body-header">
-				<span class="fa fa-tag"></span>Travel Country</span>
+			<div class="clearfix">
+				<div class="col-md-4 titem-body-header">
+					<span class="fa fa-tag tag"></span>{{ g.category.name ? g.category.name : "None"}}</span>
+				</div>
+				<div class="col-md-4 titem-body-header text-center">
+					<strong>{{ g.goal.percentComplete }}%</strong> Complete
+				</div>
+				<div class="col-md-4 titem-body-header text-right">
+					{{ g.stats.numSubgoals }}<span class="fa fa-copy"></span>
+					{{ g.stats.numNotes }}<span class="fa fa-comments"></span>
+					{{ g.stats.numMilestones }}<span class="fa fa-flag"></span>
+				</div>
 			</div>
-			<div class="titem-body-content"></div>
+			<div class="titem-body-content">
+				<tabset>
+					<tab>
+						<tab-heading><span class="fa fa-copy"></span> Subgoals</tab-heading>
+						<div class="text-right tab-content-header"><a href="#"><span class="fa fa-plus"></span> Add New</a></div>
+						<div class="tab-content-body">
+							<div ng-repeat="subg in g.subgoals | orderBy: 'beginDate'">{{ subg.name }}</div>
+						</div>
+					</tab>
+					<tab>
+						<tab-heading><span class="fa fa-comments"></span> Notes</tab-heading>
+						<div class="text-right tab-content-header"><a href="#"><span class="fa fa-plus"></span> Add New</a></div>
+						<div class="tab-content-body"></div>
+					</tab>
+					<tab>
+						<tab-heading><span class="fa fa-flag"></span> Milestones</tab-heading>
+						<div class="text-right tab-content-header"><a href="#"><span class="fa fa-plus"></span> Add New</a></div>
+						<div class="tab-content-body"></div>
+					</tab>
+				</tabset>
+			</div>
 		</div>
 	</accordion-group>
 </accordion>

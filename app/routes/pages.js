@@ -45,6 +45,8 @@ module.exports = function(app) {
                             numMilestones: 0
                         };
 
+                        var goalCategory = null;
+
                         async.parallel([
                         function(callback) {
                             Note.count({ parentId: currentGoal._id }, function(err, count) {
@@ -63,10 +65,21 @@ module.exports = function(app) {
                                 stats.numMilestones = count;
                                 callback(err);
                             });
+                        },
+                        function(callback) {
+                            if (currentGoal.categoryId) {
+                                Category.find({ _id: currentGoal.categoryId }, 'name color', function(err, category) {
+                                    goalCategory = category[0];
+                                    callback(err);
+                                });
+                            } else {
+                                callback();
+                            }
                         }], function(err) {
                             page.subgoals.push({ 
-                                'goal' : currentGoal,
-                                'stats': stats
+                                'goal'     : currentGoal,
+                                'stats'    : stats,
+                                'category' : goalCategory
                             });
                             callback(err);
                         });
@@ -148,6 +161,8 @@ module.exports = function(app) {
                                 numMilestones: 0
                             };
 
+                            var goalCategory = null;
+
                             async.parallel([
                             function(callback) {
                                 Note.count({ parentId: currentGoal._id }, function(err, count) {
@@ -166,10 +181,21 @@ module.exports = function(app) {
                                     stats.numMilestones = count;
                                     callback(err);
                                 });
+                            },
+                            function(callback) {
+                                if (currentGoal.categoryId) {
+                                    Category.find({ _id: currentGoal.categoryId }, 'name color', function(err, category) {
+                                        goalCategory = category[0];
+                                        callback(err);
+                                    });
+                                } else {
+                                    callback();
+                                }
                             }], function(err) {
                                 page.subgoals.push({ 
-                                    'goal' : currentGoal,
-                                    'stats': stats
+                                    'goal'     : currentGoal,
+                                    'stats'    : stats,
+                                    'category' : goalCategory
                                 });
                                 callback(err);
                             });
