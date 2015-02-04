@@ -92,4 +92,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'jshint', 'ngAnnotate', 'uglify', 'concurrent']);
+  grunt.registerTask('heroku', ['clean', 'compass', 'cssmin', 'jshint', 'ngAnnotate', 'uglify', 'concurrent']);
 };
