@@ -43,7 +43,7 @@ require('./app/routes/note')(app);
 require('./app/routes/category')(app);
 require('./app/routes/pages')(app);
 
-require('./app/routes/frontend')(app);
+// require('./app/routes/frontend')(app);
 
 // start app ===============================================
 // startup our app at http://localhost:8080
