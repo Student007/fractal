@@ -10,7 +10,9 @@
 					<h3 class="titem-title">{{ g.goal.name }}</h3>
 					<div class="titem-header-ctrls pull-right">
 						<span class="titem-header-date" ng-show="g.goal.beginDate && g.goal.endDate"><strong>{{ g.goal.beginDate | date:'MM/dd/yyyy'}}</strong> to <strong>{{ g.goal.endDate | date:'MM/dd/yyyy'}}</strong></span>
-						<span class="titem-header-actions"><a class="fa fa-edit" ng-click="barEdit(g.goal, $event)"></a><a class="fa fa-external-link" ng-click="barGoTo('/project/' + project._id + '/goal/' + g.goal._id, $event)"></a></span>
+						<span class="titem-header-date" ng-show="g.goal.beginDate && !(g.goal.endDate)">Begin: <strong>{{ g.goal.beginDate | date:'MM/dd/yyyy'}}</strong></span>
+						<span class="titem-header-date" ng-show="g.goal.endDate && !(g.goal.beginDate)">End: <strong>{{ g.goal.endDate | date:'MM/dd/yyyy'}}</strong></span>
+						<span class="titem-header-actions"><a class="fa fa-edit" ng-click="barEdit(g.goal, $event)"></a></a><a class="fa fa-external-link" ng-click="barGoTo('/project/' + project._id + '/goal/' + g.goal._id, $event)"></a></span>
 					</div>
 				</div>
 			</div>

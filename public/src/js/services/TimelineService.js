@@ -37,7 +37,7 @@ angular.module('goals').factory('TimelineService', function() {
             // console.log("itemDays: " + itemDays);
             // console.log("itemDaysPush: " + itemDaysPush);
 
-            if (this.begin && this.end) {
+            if (this.begin && this.end && this.days > 0) {
                 results.push = Math.round((itemDaysPush / this.days) * 100); //push %
                 results.size = Math.round((itemDays / this.days) * 100); // size %
 

@@ -3,8 +3,9 @@
 angular.module('goals').controller('GoalController', function($scope, $routeParams, $filter,
     PageService, GoalService, NoteService, MilestoneService, TimelineService, isGoal) {
 
-    $scope.isGoal      = isGoal;
-    $scope.id          = ( isGoal ? $routeParams.goalId : $routeParams.projectId);
+    $scope.isGoal       = isGoal;
+    $scope.id           = ( isGoal ? $routeParams.goalId : $routeParams.projectId);
+    $scope.loadComplete = false;
        
     $scope.goal        = { _id : null};
     $scope.project     = null;
@@ -55,6 +56,8 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
             $scope.timeline    = new TimelineService($scope.goal.beginDate, 
                 $scope.goal.endDate, $scope.subgoals);
             $scope.timelineSubgoals = $scope.timeline.appendSubgoalTimelines();
+
+            $scope.loadComplete = true;
 
             var addItemsToSubgoal = function(index, subItemCat) {
                 return function(result) {

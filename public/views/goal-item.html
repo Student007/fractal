@@ -1,6 +1,6 @@
 <!-- public/views/goal-item.html -->
 
-<div class="goal-page">
+<div class="goal-page" ng-show="loadComplete">
 	<breadcrumbs ng-if="isGoal" project="project" trail="breadcrumbs" goal="goal"></breadcrumbs>
 
 	<div class="page-header">
@@ -37,16 +37,29 @@
 		</div>
 	</div>
 	<div>
-		<h3>Goals Timeline</h2>
+		<h3>Goals Timeline</h3>
 		<div ng-if="subgoals.length > 0">
 			<goal-list></goal-list>
 		</div>
 		<div ng-if="subgoals.length <= 0" class="text-center empty-notice">
 			You don't have any goals here yet. Do you want to <a href="#" class="inverted">add one?</a>
 		</div>
-		<h3>Milestones Timeline</h2>
-		<milestone-list></milestone-list>
-		<h3>Notes</h2>		
-		<note-list></note-list>
+		<h3>Milestones Timeline</h3>
+		<div ng-if="milestones.length > 0">
+			<milestone-list></milestone-list>
+		</div>
+		<div ng-if="milestones.length <= 0" class="text-center empty-notice">
+			You don't have any milestones here yet. Do you want to <a href="#" class="inverted">add one?</a>
+		</div>
+		<h3>Notes</h3>
+		<div ng-if="notes.length > 0">
+			<note-list></note-list>
+		</div>
+		<div ng-if="notes.length <= 0" class="text-center empty-notice">
+			You don't have any notes here yet. Do you want to <a href="#" class="inverted">add one?</a>
+		</div>
 	</div>
+</div>
+<div ng-hide="loadComplete">
+	Loading
 </div>
