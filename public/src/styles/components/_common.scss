@@ -1,9 +1,12 @@
 /* common.scss */
 
 $default-font-color: #494848;
+$bright-app-color-text: #8DF060;
+
 $primary-app-color: #0caf24;
 $secondary-app-color: #046312;
 
+$brightest-brand: #07BF22;
 $bright-brand: #64F025;
 
 .navbar {
@@ -39,4 +42,19 @@ a.inverted {
 		color: $secondary-app-color;
 		text-decoration: none;
 	}
+}
+
+.no-padding {
+	padding: 0 !important;
+}
+
+body {
+	background: #f2f2f2;
+}
+
+.main-container {
+	background: #ffffff;
+	border-left: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
 }

@@ -47,9 +47,9 @@ angular.module('goals').factory('TimelineService', function() {
                 results.push = regPush;
                 results.size = regSize;
 
-                if (results.size === 0) {
-                    results.size = 0.5;
-                }
+                // if (results.size === 0) {
+                //     results.size = 0.5;
+                // }
 
                 if ((results.push + results.size) > 100) {
                     var overflow = (results.push + results.size) - 100;
