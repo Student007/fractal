@@ -22,6 +22,19 @@
 			}
 		}
 
+		.percentComplete {
+			font-size: 22px;
+			color: $brightest-brand;
+		}
+
+		.goal-percent {
+			border-right: 1px solid #666666;
+		}
+
+		.col-md-12 {
+			margin-bottom: 20px;
+		}
+
 		.breadcrumb {
 			background: #cccccc;
 			border-top: 1px solid #bababa;
@@ -29,10 +42,10 @@
 			margin-bottom: 0;
 
 			a {
-				color: #047114;
+				color: #032E09;
 
 				&:hover {
-					color: #032E09;
+					color: #047114;
 				}
 			}
 
@@ -67,5 +80,9 @@
 		border-right: 0;
 		color: #bbbbbb;
 		background: #444444;
+
+		span {
+			color: #eeeeee;
+		}
 	}
 }

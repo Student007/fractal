@@ -15,9 +15,10 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
     $scope.categories  = [];
     $scope.breadcrumbs = [];
 
-    $scope.timeline    = new TimelineService($scope.goal.beginDate, 
+    $scope.timeline         = new TimelineService($scope.goal.beginDate, 
         $scope.goal.endDate, $scope.subgoals);
     $scope.timelineSubgoals = $scope.timeline.appendSubgoalTimelines();
+    $scope.goalDetails      = $scope.timeline.getGoalDateInfo();
 
     $scope.getCategoryName = function(id) {
         var found = $filter('filter')($scope.categories, {_id: id}, true);
@@ -53,9 +54,10 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
             $scope.categories  = result.categories;
             $scope.breadcrumbs = result.breadcrumbs;
 
-            $scope.timeline    = new TimelineService($scope.goal.beginDate, 
+            $scope.timeline         = new TimelineService($scope.goal.beginDate, 
                 $scope.goal.endDate, $scope.subgoals);
             $scope.timelineSubgoals = $scope.timeline.appendSubgoalTimelines();
+            $scope.goalDetails      = $scope.timeline.getGoalDateInfo();
 
             $scope.loadComplete = true;
 

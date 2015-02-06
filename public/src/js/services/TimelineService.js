@@ -3,13 +3,28 @@ angular.module('goals').factory('TimelineService', function() {
     return function(begin, end, subgoals) {
         this.subgoals     = subgoals;
         this.subgoalRange = getSubgoalRange();
+        this.goalBegin    = begin;
+        this.goalEnd      = end;
         this.begin        = this.subgoalRange.earliest; // (begin !== undefined && begin !== null ? begin : this.subgoalRange.earliest);
         this.end          = this.subgoalRange.latest; // (end !== undefined && end !== null ? end : this.subgoalRange.latest);
         this.days         = getNumDays(this.begin,this.end);
 
-        console.log("begin: " + this.begin);
-        console.log("end: " + this.end);
-        console.log("days: " + this.days);
+        // console.log("begin: " + this.begin);
+        // console.log("end: " + this.end);
+        // console.log("days: " + this.days);
+
+        this.getGoalDateInfo = function() {
+            var goalData = {};
+
+            goalData.subgoalData = this.subgoalRange;
+            goalData.subgoalData.duration = getNumDays(this.subgoalRange.earliest, this.subgoalRange.latest);
+
+            if (this.goalBegin && this.goalEnd) {
+                goalData.duration = getNumDays(this.goalBegin, this.goalEnd);
+            }
+
+            return goalData;
+        };
 
         this.setParams = function(begin, end, subgoals) {
             this.subgoals     = subgoals;
