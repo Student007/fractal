@@ -38,8 +38,18 @@ angular.module('goals').factory('TimelineService', function() {
             // console.log("itemDaysPush: " + itemDaysPush);
 
             if (this.begin && this.end && this.days > 0) {
-                results.push = Math.round((itemDaysPush / this.days) * 100); //push %
-                results.size = Math.round((itemDays / this.days) * 100); // size %
+                var roundPush = Math.round((itemDaysPush / this.days) * 100); //push %
+                var roundSize = Math.round((itemDays / this.days) * 100); // size %
+
+                var regPush = (itemDaysPush / this.days) * 100;
+                var regSize = (itemDays / this.days) * 100;
+
+                results.push = regPush;
+                results.size = regSize;
+
+                if (results.size === 0) {
+                    results.size = 0.5;
+                }
 
                 if ((results.push + results.size) > 100) {
                     var overflow = (results.push + results.size) - 100;
