@@ -14,6 +14,10 @@ $bright-brand: #64F025;
 	border-radius: 0;
 }
 
+.navbar-inverse {
+	background: #111111;
+}
+
 .btn {
 	border-radius: 0;
 }
@@ -61,4 +65,9 @@ body {
 
 .main-container .container {
 	padding-bottom: 20px;
+}
+
+.loading {
+	margin-top: 75px;
+	margin-bottom: 75px;
 }

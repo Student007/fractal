@@ -14,11 +14,11 @@
 					<strong>Goal Duration:</strong> <span>{{ goalDetails.duration ? goalDetails.duration + " days" : "None" }}</span>
 				</div>
 				<div class="col-md-3 no-padding text-center goal-percent">
-					<div class="percentComplete">{{ goal.percentComplete }}%</div>
+					<div class="percentComplete">{{ goal.percentComplete ? goal.percentComplete : "0" }}%</div>
 					<strong>Goal Complete</strong> 
 				</div>
 				<div class="col-md-3 no-padding text-center">
-					<div class="percentComplete">{{ goal.percentComplete }}%</div>
+					<div class="percentComplete">{{ subgoalPercentage }}%</div>
 					<strong>Subgoals Complete</strong> 
 				</div>
 				<div class="col-md-3 no-padding text-right">
@@ -85,7 +85,7 @@
 	</div>
 </div>
 <div ng-hide="loadComplete" class="goal-page">
-	<div class="text-center empty-notice">
+	<div class="text-center loading">
 		<img src="img/ajax-loader.gif" />
 	</div>
 </div>
