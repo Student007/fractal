@@ -8,20 +8,20 @@
 		</div>
 		<div class="panel panel-default details-panel">
 			<div class="panel-body">
-				<div class="col-md-3 no-padding">
+				<div class="col-md-3" ng-show="isGoal">
 					<strong>Goal Begin Date:</strong> <span>{{ goal.beginDate ? goal.beginDate : "None" | date:'MM/dd/yyyy'}}</span><br />
 					<strong>Goal End Date:</strong> <span>{{ goal.endDate ? goal.endDate : "None" | date:'MM/dd/yyyy'}}</span><br/>
 					<strong>Goal Duration:</strong> <span>{{ goalDetails.duration ? goalDetails.duration + " days" : "None" }}</span>
 				</div>
-				<div class="col-md-3 no-padding text-center goal-percent">
+				<div class="col-md-3 text-center goal-percent" ng-show="isGoal">
 					<div class="percentComplete">{{ goal.percentComplete ? goal.percentComplete : "0" }}%</div>
 					<strong>Goal Complete</strong> 
 				</div>
-				<div class="col-md-3 no-padding text-center">
+				<div ng-class="{'col-md-3 text-center': isGoal, 'col-md-6 text-right goal-percent': !isGoal}">
 					<div class="percentComplete">{{ subgoalPercentage }}%</div>
 					<strong>Subgoals Complete</strong> 
 				</div>
-				<div class="col-md-3 no-padding text-right">
+				<div ng-class="{'col-md-3 text-right': isGoal, 'col-md-6 text-left': !isGoal}">
 					<strong>Subgoals Begin Date:</strong> <span>{{ goalDetails.subgoalData.earliest ? goalDetails.subgoalData.earliest : "None" | date:'MM/dd/yyyy'}}</span><br />
 					<strong>Subgoals End Date:</strong> <span>{{ goalDetails.subgoalData.latest ? goalDetails.subgoalData.latest : "None" | date:'MM/dd/yyyy'}}</span><br />
 					<strong>Subgoals Duration:</strong> <span>{{ goalDetails.subgoalData.duration ? goalDetails.subgoalData.duration + " days" : "None" }}</span>

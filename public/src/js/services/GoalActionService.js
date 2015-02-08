@@ -62,12 +62,9 @@ angular.module('goals').factory('GoalActionService', function($http, $rootScope,
 
             if (goals && goals.length > 0) {
                 for (var g in goals) {
-                    console.log(goals[g]);
                     total += goals[g].goal.percentComplete;
                 }
                 percentage = Math.round(total / goals.length);
-                console.log("total: " + total);
-                console.log("length: " + goals.length);
             }
 
             return percentage;
