@@ -61,17 +61,23 @@
 		</div>
 		<div>
 			<h3>Goals Timeline</h3>
-			<div class="mav-timeline">
-				<div class="dates">
-					<div>
+			<div class="nav-timeline">
+				<div class="dates clearfix">
+					<div class="begin-date">
 						<h5><strong>Begin</strong></h5>
-						<span>{{ timeDetails.timelineBegin | date:'MM/dd/yyyy'}}</span>
+						<span>{{ timeDetails.timelineBegin ? timeDetails.timelineBegin : "None" | date:'MM/dd/yyyy'}}</span>
 					</div>
-					<div>
+					<div class="end-date">
 						<h5><strong>End</strong></h5>
-						<span>{{ timeDetails.timelineEnd | date:'MM/dd/yyyy'}}</span>
+						<span>{{ timeDetails.timelineEnd ? timeDetails.timelineEnd : "None" | date:'MM/dd/yyyy'}}</span>
 					</div>
 				</div>
+				<!-- <div class="date-ticks-wrapper clearfix">
+					<a href class="out-of-range date-tick">&nbsp;</a>
+					<a href class="date-tick">&nbsp;</a>
+					<a href class="date-tick">&nbsp;</a>
+					<a href class="date-tick last">&nbsp;</a>
+				</div> -->
 			</div>
 			<div ng-if="subgoals.length > 0">
 				<goal-list></goal-list>

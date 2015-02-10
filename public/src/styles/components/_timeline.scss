@@ -2,7 +2,54 @@
 $bar-height: 40px;
 
 .nav-timeline {
-	
+	border-left: 1px solid #dddddd;
+	border-right: 1px solid #dddddd;
+	border-top: 1px solid #dddddd;
+	margin-bottom: 5px;
+	color: #666;
+
+	h5 {
+		margin: 0;
+	}
+
+	.dates {
+		padding: 5px;
+		padding-bottom: 2px;
+	}
+
+	.begin-date {
+		float: left;
+	}
+
+	.end-date {
+		float: right;
+		text-align: right;
+	}
+
+	a.date-tick {
+		width: 25%;
+		display: inline-block;
+		border-right: 1px solid #bbbbbb;
+		float: left;
+		background: darken(#E6FFDB, 10%); //#C8F0B6;
+		box-sizing: border-box;
+
+		&.last {
+			border: 0;
+		}
+
+		&:hover {
+			background: darken(#E6FFDB, 20%);
+		}
+
+		&.out-of-range {
+			background: #f0f0f0;
+
+			&:hover {
+				background: darken(#f0f0f0, 5%);
+			}
+		}
+	}
 }
 
 .timeline-item {
