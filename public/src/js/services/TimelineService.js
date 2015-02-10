@@ -5,8 +5,31 @@ angular.module('goals').factory('TimelineService', function() {
         this.subgoalRange = getSubgoalRange();
         this.goalBegin    = begin;
         this.goalEnd      = end;
-        this.begin        = (begin && new Date(begin) < this.subgoalRange.earliest ? begin : this.subgoalRange.earliest);
-        this.end          = (end && new Date(end) > this.subgoalRange.latest ? end : this.subgoalRange.latest);
+
+        this.begin        = null;
+        this.end          = null;
+
+        // logic to determine proper begin and end values
+        if (begin) {
+            if (this.subgoalRange.earliest) {
+                this.begin = (new Date(begin) < this.subgoalRange.earliest ? begin : this.subgoalRange.earliest);
+            } else {
+                this.begin = begin;
+            }
+        } else {
+            this.begin = this.subgoalRange.earliest;
+        }
+
+        if (end) {
+            if (this.subgoalRange.latest) {
+                this.end = (new Date(end) > this.subgoalRange.latest ? end : this.subgoalRange.latest);
+            } else {
+                this.end = end;
+            }
+        } else {
+            this.end = this.subgoalRange.latest;
+        }
+
         this.days         = getNumDays(this.begin,this.end);
 
         console.log("begin: " + this.begin);
@@ -15,32 +38,39 @@ angular.module('goals').factory('TimelineService', function() {
 
         this.getGoalDateInfo = function() {
             var goalData = {
-                subgoalStart: null,
+                subgoalBegin: null,
                 subgoalEnd: null,
                 subgoalDuration: null,
-                goalStart: null,
+                goalBegin: null,
                 goalEnd: null,
                 goalDuration: null,
+                timelineBegin: null,
+                timelineEnd: null,
+                timelineDuration: null,
                 daysBetween: {
-                    subgoalGoalStart: null,
+                    subgoalGoalBegin: null,
                     subgoalGoalEnd: null
                 }
             };
 
-            goalData.subgoalStart = this.subgoalRange.earliest;
+            goalData.timelineBegin = this.begin;
+            goalData.timelineEnd = this.end;
+            goalData.timelineDuration = this.days;
+
+            goalData.subgoalBegin = this.subgoalRange.earliest;
             goalData.subgoalEnd = this.subgoalRange.latest;
             goalData.subgoalDuration = getNumDays(this.subgoalRange.earliest, this.subgoalRange.latest);
 
             if (this.goalBegin) {
-                goalData.goalStart = this.goalBegin;
-
-                var daysBetween = getNumDays(this.subgoalRange.earliest, this.goalBegin);
-                if (daysBetween > 0) {
-
-                }
+                goalData.goalBegin = this.goalBegin;
+                goalData.daysBetween.subgoalGoalBegin = getNumDays(this.subgoalRange.earliest, this.goalBegin);
+            }
+            if (this.goalEnd) {
+                goalData.goalEnd = this.goalEnd;
+                goalData.daysBetween.subgoalGoalEnd = getNumDays(this.goalEnd, this.subgoalRange.latest);
             }
             if (this.goalBegin && this.goalEnd) {
-                goalData.duration = getNumDays(this.goalBegin, this.goalEnd);
+                goalData.goalDuration = getNumDays(this.goalBegin, this.goalEnd);
             }
 
             return goalData;

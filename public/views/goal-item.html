@@ -11,7 +11,7 @@
 				<div class="col-md-3" ng-show="isGoal">
 					<strong>Goal Begin Date:</strong> <span>{{ goal.beginDate ? goal.beginDate : "None" | date:'MM/dd/yyyy'}}</span><br />
 					<strong>Goal End Date:</strong> <span>{{ goal.endDate ? goal.endDate : "None" | date:'MM/dd/yyyy'}}</span><br/>
-					<strong>Goal Duration:</strong> <span>{{ goalDetails.duration ? goalDetails.duration + " days" : "None" }}</span>
+					<strong>Goal Duration:</strong> <span>{{ timeDetails.goalDuration ? timeDetails.goalDuration + " days" : "None" }}</span>
 				</div>
 				<div class="col-md-3 text-center goal-percent" ng-show="isGoal">
 					<div class="percentComplete">{{ goal.percentComplete ? goal.percentComplete : "0" }}%</div>
@@ -22,9 +22,9 @@
 					<strong>Subgoals Complete</strong> 
 				</div>
 				<div ng-class="{'col-md-3 text-right': isGoal, 'col-md-6 text-left': !isGoal}">
-					<strong>Subgoals Begin Date:</strong> <span>{{ goalDetails.subgoalData.earliest ? goalDetails.subgoalData.earliest : "None" | date:'MM/dd/yyyy'}}</span><br />
-					<strong>Subgoals End Date:</strong> <span>{{ goalDetails.subgoalData.latest ? goalDetails.subgoalData.latest : "None" | date:'MM/dd/yyyy'}}</span><br />
-					<strong>Subgoals Duration:</strong> <span>{{ goalDetails.subgoalData.duration ? goalDetails.subgoalData.duration + " days" : "None" }}</span>
+					<strong>Subgoals Begin Date:</strong> <span>{{ timeDetails.subgoalBegin ? timeDetails.subgoalBegin : "None" | date:'MM/dd/yyyy'}}</span><br />
+					<strong>Subgoals End Date:</strong> <span>{{ timeDetails.subgoalEnd ? timeDetails.subgoalEnd : "None" | date:'MM/dd/yyyy'}}</span><br />
+					<strong>Subgoals Duration:</strong> <span>{{ timeDetails.subgoalDuration ? timeDetails.subgoalDuration + " days" : "None" }}</span>
 				</div>
 			</div>
 		</div>
@@ -61,14 +61,16 @@
 		</div>
 		<div>
 			<h3>Goals Timeline</h3>
-			<div class="date-timeline">
-				<div>
-					<h5><strong>Start</strong></h5>
-					<span>{{ goal.beginDate | date:'MM/dd/yyyy'}}</span>
-				</div>
-				<div>
-					<h5><strong>End</strong></h5>
-					<span>{{ goal.endDate | date:'MM/dd/yyyy'}}</span>
+			<div class="mav-timeline">
+				<div class="dates">
+					<div>
+						<h5><strong>Begin</strong></h5>
+						<span>{{ timeDetails.timelineBegin | date:'MM/dd/yyyy'}}</span>
+					</div>
+					<div>
+						<h5><strong>End</strong></h5>
+						<span>{{ timeDetails.timelineEnd | date:'MM/dd/yyyy'}}</span>
+					</div>
 				</div>
 			</div>
 			<div ng-if="subgoals.length > 0">
