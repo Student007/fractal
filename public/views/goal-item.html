@@ -61,6 +61,16 @@
 		</div>
 		<div>
 			<h3>Goals Timeline</h3>
+			<div class="date-timeline">
+				<div>
+					<h5><strong>Start</strong></h5>
+					<span>{{ goal.beginDate | date:'MM/dd/yyyy'}}</span>
+				</div>
+				<div>
+					<h5><strong>End</strong></h5>
+					<span>{{ goal.endDate | date:'MM/dd/yyyy'}}</span>
+				</div>
+			</div>
 			<div ng-if="subgoals.length > 0">
 				<goal-list></goal-list>
 			</div>

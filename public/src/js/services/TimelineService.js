@@ -5,20 +5,40 @@ angular.module('goals').factory('TimelineService', function() {
         this.subgoalRange = getSubgoalRange();
         this.goalBegin    = begin;
         this.goalEnd      = end;
-        this.begin        = this.subgoalRange.earliest; // (begin !== undefined && begin !== null ? begin : this.subgoalRange.earliest);
-        this.end          = this.subgoalRange.latest; // (end !== undefined && end !== null ? end : this.subgoalRange.latest);
+        this.begin        = (begin && new Date(begin) < this.subgoalRange.earliest ? begin : this.subgoalRange.earliest);
+        this.end          = (end && new Date(end) > this.subgoalRange.latest ? end : this.subgoalRange.latest);
         this.days         = getNumDays(this.begin,this.end);
 
-        // console.log("begin: " + this.begin);
-        // console.log("end: " + this.end);
-        // console.log("days: " + this.days);
+        console.log("begin: " + this.begin);
+        console.log("end: " + this.end);
+        console.log("days: " + this.days);
 
         this.getGoalDateInfo = function() {
-            var goalData = {};
+            var goalData = {
+                subgoalStart: null,
+                subgoalEnd: null,
+                subgoalDuration: null,
+                goalStart: null,
+                goalEnd: null,
+                goalDuration: null,
+                daysBetween: {
+                    subgoalGoalStart: null,
+                    subgoalGoalEnd: null
+                }
+            };
 
-            goalData.subgoalData = this.subgoalRange;
-            goalData.subgoalData.duration = getNumDays(this.subgoalRange.earliest, this.subgoalRange.latest);
+            goalData.subgoalStart = this.subgoalRange.earliest;
+            goalData.subgoalEnd = this.subgoalRange.latest;
+            goalData.subgoalDuration = getNumDays(this.subgoalRange.earliest, this.subgoalRange.latest);
 
+            if (this.goalBegin) {
+                goalData.goalStart = this.goalBegin;
+
+                var daysBetween = getNumDays(this.subgoalRange.earliest, this.goalBegin);
+                if (daysBetween > 0) {
+
+                }
+            }
             if (this.goalBegin && this.goalEnd) {
                 goalData.duration = getNumDays(this.goalBegin, this.goalEnd);
             }
