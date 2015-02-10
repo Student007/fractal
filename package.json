@@ -19,6 +19,6 @@
     "grunt-concurrent": "~0.5.0"
   },
   "scripts": {
-    "postinstall": "node_modules/.bin/bower install;"
+    "postinstall": ".bin/bower install;"
   }
 }
