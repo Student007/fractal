@@ -72,12 +72,11 @@
 						<span>{{ timeDetails.timelineEnd ? timeDetails.timelineEnd : "None" | date:'MM/dd/yyyy'}}</span>
 					</div>
 				</div>
-				<!-- <div class="date-ticks-wrapper clearfix">
-					<a href class="out-of-range date-tick">&nbsp;</a>
-					<a href class="date-tick">&nbsp;</a>
-					<a href class="date-tick">&nbsp;</a>
-					<a href class="date-tick last">&nbsp;</a>
-				</div> -->
+				<div class="date-ticks-wrapper clearfix" ng-hide="timeDetails.timelineDuration > 260">
+					<a href ng-repeat="i in utilities.range(dateTimeline.beforeRange) track by $index" class="out-of-range date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="2/11/15"  tooltip-trigger="mouseenter" tooltip-placement="top">&nbsp;</a>
+					<a href ng-repeat="i in utilities.range(dateTimeline.inRange) track by $index" class="date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="2/11/15"  tooltip-trigger="mouseenter" tooltip-placement="top">&nbsp;</a>
+					<a href ng-repeat="i in utilities.range(dateTimeline.afterRange) track by $index" class="out-of-range date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="2/11/15"  tooltip-trigger="mouseenter" tooltip-placement="top">&nbsp;</a>
+				</div>
 			</div>
 			<div ng-if="subgoals.length > 0">
 				<goal-list></goal-list>

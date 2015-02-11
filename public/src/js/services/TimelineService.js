@@ -46,11 +46,7 @@ angular.module('goals').factory('TimelineService', function() {
                 goalDuration: null,
                 timelineBegin: null,
                 timelineEnd: null,
-                timelineDuration: null,
-                daysBetween: {
-                    subgoalGoalBegin: null,
-                    subgoalGoalEnd: null
-                }
+                timelineDuration: null
             };
 
             goalData.timelineBegin = this.begin;
@@ -61,14 +57,6 @@ angular.module('goals').factory('TimelineService', function() {
             goalData.subgoalEnd = this.subgoalRange.latest;
             goalData.subgoalDuration = getNumDays(this.subgoalRange.earliest, this.subgoalRange.latest);
 
-            if (this.goalBegin) {
-                goalData.goalBegin = this.goalBegin;
-                goalData.daysBetween.subgoalGoalBegin = getNumDays(this.subgoalRange.earliest, this.goalBegin);
-            }
-            if (this.goalEnd) {
-                goalData.goalEnd = this.goalEnd;
-                goalData.daysBetween.subgoalGoalEnd = getNumDays(this.goalEnd, this.subgoalRange.latest);
-            }
             if (this.goalBegin && this.goalEnd) {
                 goalData.goalDuration = getNumDays(this.goalBegin, this.goalEnd);
             }
@@ -82,6 +70,50 @@ angular.module('goals').factory('TimelineService', function() {
             this.begin        = (begin !== null && begin !== undefined ? begin : this.subgoalRange.earliest);
             this.end          = (end !== null && end !== undefined ? end : this.subgoalRange.latest);
             this.days         = getNumDays(begin,end);
+        };
+
+        this.getFutureDate = function(date, numDays) {
+            var newDate = date;
+            return newDate.setDate(newDate.getDate() + numDays);
+        };
+
+        this.getDateTimeline = function() {
+            var results = {
+                beforeRange: 0,
+                inRange: 0,
+                afterRange: 0,
+                tick: 1,
+            };
+
+            results.inRange = this.days;
+
+            if (results.inRange) {
+                results.tick = 100 / results.inRange;
+            }
+
+            if (this.goalBegin) {
+                var beforeRange = getNumDays(this.subgoalRange.earliest, this.goalBegin);
+               
+                if (beforeRange > 0) {
+                    results.beforeRange = beforeRange;
+
+                    if (results.inRange) {
+                        results.inRange = results.inRange - beforeRange;
+                    }
+                }
+            }
+            if (this.goalEnd) {
+                var afterRange = getNumDays(this.goalEnd, this.subgoalRange.latest);
+                if (afterRange > 0) {
+                    results.afterRange = afterRange;
+
+                    if (results.inRange) {
+                        results.inRange = results.inRange - afterRange;
+                    }
+                }
+            }
+            console.log(results);
+            return results;
         };
 
         //gets push and size values for timeline display
@@ -163,7 +195,7 @@ angular.module('goals').factory('TimelineService', function() {
             if (begin && end) {
                 var beginDate = new Date(begin);
                 var endDate = new Date(end);
-                return Math.round(Math.abs((endDate.getTime() - beginDate.getTime())/(oneDay)));
+                return Math.round(((endDate.getTime() - beginDate.getTime())/(oneDay)));
             } else {
                 return this.days;
             }
