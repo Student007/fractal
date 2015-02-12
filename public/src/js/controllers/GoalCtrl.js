@@ -23,6 +23,24 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
     $scope.timeDetails       = $scope.timeline.getGoalDateInfo();
     $scope.dateTimeline      = $scope.timeline.getDateTimeline();
 
+    $scope.barEdit = function(goal, e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        $scope.goalActions.update(goal);
+    };
+
+    $scope.barGoTo = function(loc, e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        $location.path(loc);
+    };
+
     $scope.getCategoryName = function(id) {
         var found = $filter('filter')($scope.categories, {_id: id}, true);
         if (found.length) {

@@ -47,7 +47,7 @@ angular.module('goals').service('ModalService', function($modal, $location) {
         },
 
         // new goal modal
-        createGoalModal : function(projectId, parentId, categories, callback) {
+        createGoalModal : function(projectId, parentId, beginDate, endDate, categories, callback) {
             var $this = this;
 
             var modal = $modal.open({
@@ -58,8 +58,8 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                     goal: function() { return {
                             name: null,
                             description: null,
-                            beginDate: null,
-                            endDate: null,
+                            beginDate: beginDate,
+                            endDate: endDate,
                             percentComplete: 0,
                             categoryId: null,
                             projectId: projectId,

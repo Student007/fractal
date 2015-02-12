@@ -73,46 +73,73 @@ angular.module('goals').factory('TimelineService', function() {
         };
 
         this.getFutureDate = function(date, numDays) {
-            var newDate = date;
-            return newDate.setDate(newDate.getDate() + numDays);
+            var newDate = new Date(date);
+            return new Date(newDate.setDate(newDate.getDate() + numDays));
+        };
+
+        this.getFutureDates = function(date, numDays) {
+            var days = [];
+            var newDate = new Date(date);
+
+            days[0] = newDate;
+            for (var i = 1; i <= numDays; i++) {
+                days[i] = this.getFutureDate(newDate, i);
+            }
+
+            return days;
         };
 
         this.getDateTimeline = function() {
             var results = {
-                beforeRange: 0,
-                inRange: 0,
-                afterRange: 0,
-                tick: 1,
+                beforeRange: [],
+                inRange: [],
+                afterRange: [],
+                tick: 1
             };
 
-            results.inRange = this.days;
+            var daysBeforeRange = 0;
+            var daysInRange     = this.days;
+            var daysAfterRange  = 0;
 
-            if (results.inRange) {
-                results.tick = 100 / results.inRange;
+            console.log("days: " + daysInRange);
+
+            if (daysInRange) {
+                results.tick = 100 / daysInRange;
             }
 
             if (this.goalBegin) {
                 var beforeRange = getNumDays(this.subgoalRange.earliest, this.goalBegin);
                
                 if (beforeRange > 0) {
-                    results.beforeRange = beforeRange;
-
-                    if (results.inRange) {
-                        results.inRange = results.inRange - beforeRange;
+                    daysBeforeRange = beforeRange;
+                    if (daysInRange) {
+                        daysInRange = daysInRange - daysBeforeRange;
                     }
                 }
             }
+
             if (this.goalEnd) {
                 var afterRange = getNumDays(this.goalEnd, this.subgoalRange.latest);
                 if (afterRange > 0) {
-                    results.afterRange = afterRange;
-
-                    if (results.inRange) {
-                        results.inRange = results.inRange - afterRange;
+                    daysAfterRange = afterRange;
+                    if (daysInRange) {
+                        daysInRange = daysInRange - daysAfterRange;
                     }
                 }
             }
+            
+            var dayArray = this.getFutureDates(this.begin, this.days);
+            results.beforeRange = dayArray.slice(0, daysBeforeRange);
+            results.inRange = dayArray.slice(daysBeforeRange, daysInRange + daysBeforeRange);
+            results.afterRange = dayArray.slice(daysBeforeRange + daysInRange, daysBeforeRange + daysInRange + daysAfterRange);
+
+            console.log('days before: ' + daysBeforeRange);
+            console.log('days in range: ' + daysInRange);
+            console.log('days after: ' + daysAfterRange);
+            
+            console.log(dayArray);
             console.log(results);
+            
             return results;
         };
 
@@ -150,8 +177,6 @@ angular.module('goals').factory('TimelineService', function() {
 
                 if ((results.push + results.size) > 100) {
                     var overflow = (results.push + results.size) - 100;
-                    console.log(results);
-                    console.log('overflow ' + overflow);
                     results.size = results.size - overflow;
                 }
             } else {

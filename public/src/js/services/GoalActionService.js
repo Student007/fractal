@@ -12,8 +12,8 @@ angular.module('goals').factory('GoalActionService', function($http, $rootScope,
             $location.path(path);
         },
 
-        create : function(projectId, parentId) {
-            ModalService.createGoalModal(projectId, parentId, PageService.getCategories(), function(goal) {
+        create : function(projectId, parentId, beginDate, endDate) {
+            ModalService.createGoalModal(projectId, parentId, beginDate, endDate, PageService.getCategories(), function(goal) {
                 GoalService.create(goal).then(function(result) {
                     if (result.data.success) {
                         PageService.reloadData();

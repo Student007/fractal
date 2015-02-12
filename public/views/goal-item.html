@@ -32,13 +32,13 @@
 	</div>
 	<div class="container">
 		<div class="btn-group" dropdown>
-		  <button type="button" class="btn btn-primary" ng-click="goalActions.create(project._id, goal._id)">Create</button>
+		  <button type="button" class="btn btn-primary" ng-click="goalActions.create(project._id, goal._id, goal.beginDate, goal.endDate)">Create</button>
 		  <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
 		    <span class="caret"></span>
 		    <span class="sr-only">Create</span>
 		  </button>
 		  <ul class="dropdown-menu" role="menu">
-		    <li><a href ng-click="goalActions.create(project._id, goal._id)">Goal</a></li>
+		    <li><a href ng-click="goalActions.create(project._id, goal._id, goal.beginDate, goal.endDate)">Goal</a></li>
 		    <li><a href ng-click="noteActions.create(project._id, goal._id)">Note</a></li>
 		    <li><a href ng-click="milestoneActions.create(project._id, goal._id)">Milestone</a></li>
 		  </ul>
@@ -73,16 +73,16 @@
 					</div>
 				</div>
 				<div class="date-ticks-wrapper clearfix" ng-hide="timeDetails.timelineDuration > 260">
-					<a href ng-repeat="i in utilities.range(dateTimeline.beforeRange) track by $index" class="out-of-range date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="2/11/15"  tooltip-trigger="mouseenter" tooltip-placement="top">&nbsp;</a>
-					<a href ng-repeat="i in utilities.range(dateTimeline.inRange) track by $index" class="date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="2/11/15"  tooltip-trigger="mouseenter" tooltip-placement="top">&nbsp;</a>
-					<a href ng-repeat="i in utilities.range(dateTimeline.afterRange) track by $index" class="out-of-range date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="2/11/15"  tooltip-trigger="mouseenter" tooltip-placement="top">&nbsp;</a>
+					<a href ng-repeat="i in dateTimeline.beforeRange" class="out-of-range date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="{{ i | date:'MM/dd/yyyy' }}"  tooltip-trigger="mouseenter" tooltip-placement="top" ng-click="goalActions.create(project._id, goal._id, i, timeline.getFutureDate(i, 1))">&nbsp;</a>
+					<a href ng-repeat="i in dateTimeline.inRange" class="date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="{{ i | date:'MM/dd/yyyy' }}" tooltip-trigger="mouseenter" tooltip-placement="top" ng-click="goalActions.create(project._id, goal._id, i, timeline.getFutureDate(i, 1))">&nbsp;</a>
+					<a href ng-repeat="i in dateTimeline.afterRange" class="out-of-range date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="{{ i | date:'MM/dd/yyyy' }}" tooltip-trigger="mouseenter" tooltip-placement="top" ng-click="goalActions.create(project._id, goal._id, i, timeline.getFutureDate(i, 1))">&nbsp;</a>
 				</div>
 			</div>
 			<div ng-if="subgoals.length > 0">
 				<goal-list></goal-list>
 			</div>
 			<div ng-if="subgoals.length <= 0" class="text-center empty-notice">
-				You don't have any goals here yet. Do you want to <a ng-click="goalActions.create(project._id, goal._id)" href class="inverted">add one?</a>
+				You don't have any goals here yet. Do you want to <a ng-click="goalActions.create(project._id, goal._id, goal.beginDate, goal.endDate)" href class="inverted">add one?</a>
 			</div>
 			<h3>Milestones Timeline</h3>
 			<div ng-if="milestones.length > 0">
