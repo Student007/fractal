@@ -4,7 +4,6 @@ $bar-height: 40px;
 .nav-timeline {
 	border-left: 1px solid #dddddd;
 	border-right: 1px solid #dddddd;
-	border-top: 1px solid #dddddd;
 	margin-bottom: 5px;
 	color: #666;
 
@@ -29,7 +28,7 @@ $bar-height: 40px;
 	a.date-tick {
 		width: 25%;
 		display: inline-block;
-		border-right: 1px solid #bbbbbb;
+		border-right: 1px solid #64F025;
 		float: left;
 		background: darken(#E6FFDB, 10%); //#C8F0B6;
 		box-sizing: border-box;
@@ -39,15 +38,20 @@ $bar-height: 40px;
 		}
 
 		&:hover {
-			background: darken(#E6FFDB, 20%);
+			background: darken(#E6FFDB, 25%);
 		}
 
 		&.out-of-range {
 			background: #f0f0f0;
+			border-right: 1px solid #bbbbbb;
 
 			&:hover {
-				background: darken(#f0f0f0, 5%);
+				background: darken(#f0f0f0, 7%);
 			}
+		}
+
+		&:last-child {
+			border: 0;
 		}
 	}
 }
