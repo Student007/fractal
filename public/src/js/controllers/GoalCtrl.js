@@ -1,6 +1,6 @@
 // public/src/js/controllers/GoalCtrl.js
 
-angular.module('goals').controller('GoalController', function($scope, $routeParams, $filter,
+angular.module('goals').controller('GoalController', function($scope, $routeParams, $filter, $location,
     PageService, GoalService, NoteService, MilestoneService, TimelineService, isGoal) {
 
     $scope.isGoal       = isGoal;
