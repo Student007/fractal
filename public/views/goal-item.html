@@ -73,9 +73,9 @@
 					</div>
 				</div>
 				<div class="date-ticks-wrapper clearfix" ng-hide="timeDetails.timelineDuration > 260">
-					<a href ng-repeat="i in dateTimeline.beforeRange" class="out-of-range date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="{{ i | date:'MM/dd/yyyy' }}"  tooltip-trigger="mouseenter" tooltip-placement="top" ng-click="goalActions.create(project._id, goal._id, i, timeline.getFutureDate(i, 1))">&nbsp;</a>
-					<a href ng-repeat="i in dateTimeline.inRange" class="date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="{{ i | date:'MM/dd/yyyy' }}" tooltip-trigger="mouseenter" tooltip-placement="top" ng-click="goalActions.create(project._id, goal._id, i, timeline.getFutureDate(i, 1))">&nbsp;</a>
-					<a href ng-repeat="i in dateTimeline.afterRange" class="out-of-range date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="{{ i | date:'MM/dd/yyyy' }}" tooltip-trigger="mouseenter" tooltip-placement="top" ng-click="goalActions.create(project._id, goal._id, i, timeline.getFutureDate(i, 1))">&nbsp;</a>
+					<a href ng-repeat="i in dateTimeline.beforeRange" class="out-of-range date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="{{ i | date:'EEE MM/dd/yyyy' }}"  tooltip-trigger="mouseenter" tooltip-placement="top" ng-click="goalActions.create(project._id, goal._id, i, timeline.getFutureDate(i, 1))">&nbsp;</a>
+					<a href ng-repeat="i in dateTimeline.inRange" class="date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="{{ i | date:'EEE MM/dd/yyyy' }}" tooltip-trigger="mouseenter" tooltip-placement="top" ng-click="goalActions.create(project._id, goal._id, i, timeline.getFutureDate(i, 1))">&nbsp;</a>
+					<a href ng-repeat="i in dateTimeline.afterRange" class="out-of-range date-tick" style="width: {{ dateTimeline.tick }}%;" tooltip="{{ i | date:'EEE MM/dd/yyyy' }}" tooltip-trigger="mouseenter" tooltip-placement="top" ng-click="goalActions.create(project._id, goal._id, i, timeline.getFutureDate(i, 1))">&nbsp;</a>
 				</div>
 			</div>
 			<div ng-if="subgoals.length > 0">
