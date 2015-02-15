@@ -7,7 +7,10 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
     $scope.id           = ( isGoal ? $routeParams.goalId : $routeParams.projectId);
     $scope.loadComplete = false;
        
-    $scope.goal        = { _id : null};
+    $scope.goal        = { _id : null,
+                           beginDate: null,
+                           endDate: null
+                         };
     $scope.project     = null;
     $scope.subgoals    = null;
     $scope.notes       = [];
