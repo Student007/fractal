@@ -1,0 +1,19 @@
+/* colors.scss - for all category color classes */
+
+.cat-default {
+	.primary {
+		background: $bright-brand;
+	}
+
+	.brighter {
+		background: lighten($bright-brand, 10%);
+	}
+
+	.darker {
+		background: darken($bright-brand, 10%);
+	}
+
+	.text {
+		color: $default-font-color;
+	}
+}
