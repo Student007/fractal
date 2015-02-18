@@ -1,19 +1,39 @@
 /* colors.scss - for all category color classes */
 
-.cat-default {
-	.primary {
-		background: $bright-brand;
-	}
+@mixin category-color($color, $font-color) {
+	background: $color;
+	color: $font-color;
 
 	.brighter {
-		background: lighten($bright-brand, 10%);
+		background: lighten($color, 10%);
 	}
 
 	.darker {
-		background: darken($bright-brand, 10%);
+		background: darken($color, 10%);
 	}
 
 	.text {
-		color: $default-font-color;
+		color: $font-color;
+	}
+}
+
+.cat-default {
+	@include category-color($bright-brand, $default-font-color);
+}
+
+.cat-blue-0 {
+	@include category-color(#0000ff, #ccc);
+}
+
+// for color selector item
+
+.swatch {
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	margin-right: 1px;
+
+	&.selected {
+		border: 1px solid #222;
 	}
 }

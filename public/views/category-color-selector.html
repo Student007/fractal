@@ -1,0 +1,4 @@
+<input class="category-color-selection" type="hidden" ng-model="ngModel">
+<div class="colors">
+	<div ng-repeat="color in catColors" class="{{ color }} swatch" ng-click="colorSelect(color)" ng-class="{ selected : color == ngModel }"></div>
+</div>

@@ -58,8 +58,8 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                     goal: function() { return {
                             name: null,
                             description: null,
-                            beginDate: beginDate,
-                            endDate: endDate,
+                            beginDate: (beginDate ? beginDate : null),
+                            endDate: (endDate ? endDate : null),
                             percentComplete: 0,
                             categoryId: null,
                             projectId: projectId,
@@ -141,7 +141,7 @@ angular.module('goals').service('ModalService', function($modal, $location) {
                     category: function() { return {
                             name: null,
                             description: null,
-                            color: null,
+                            color: 'cat-default',
                             projectId: projectId
                         };
                     }
