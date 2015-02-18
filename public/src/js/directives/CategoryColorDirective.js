@@ -16,8 +16,6 @@ angular.module('goals').directive('categoryColorSelector', function($compile, ca
                 $scope.ngModel = color;
                 ctrl.$setDirty();
             };
-         // var textField = $('input', elem).attr('ng-model', attr.ngModel);
-         // $compile(textField)($scope.$parent);
         }
     };
 });

@@ -21,8 +21,69 @@
 	@include category-color($bright-brand, $default-font-color);
 }
 
-.cat-blue-0 {
-	@include category-color(#0000ff, #ccc);
+.cat-color-0 {
+	@include category-color(#4665f9, $default-font-color);
+}
+
+.cat-color-1 {
+	@include category-color(#ff802e, $default-font-color);
+}
+
+.cat-color-2 {
+	@include category-color(#b138f8, $default-font-color);
+}
+
+.cat-color-3 {
+	@include category-color(#fd2d76, $default-font-color);
+}
+
+.cat-color-4 {
+	@include category-color(#fe2e3d, $default-font-color);
+}
+
+.cat-color-5 {
+	@include category-color(#36bdf8, $default-font-color);
+}
+
+.cat-color-6 {
+	@include category-color(#fffe2e, $default-font-color);
+}
+
+.cat-color-7 {
+	@include category-color(#aefd2d, $default-font-color);
+}
+
+// 
+.cat-color-8 {
+	@include category-color(#8399fe, $default-font-color);
+}
+
+.cat-color-9 {
+	@include category-color(#ffaa72, $default-font-color);
+}
+
+.cat-color-10 {
+	@include category-color(#cd7afe, $default-font-color);
+}
+
+.cat-color-11 {
+	@include category-color(#ff72a4, $default-font-color);
+}
+
+.cat-color-12 {
+	@include category-color(#ff727d, $default-font-color);
+}
+
+.cat-color-13 {
+	@include category-color(#78d6fe, $default-font-color);
+}
+
+.cat-color-14 {
+	@include category-color(#fffe72, $default-font-color);
+}
+
+.cat-color-15 {
+	@include category-color(#c9ff72, $default-font-color);
 }
 
 // for color selector item
@@ -35,5 +96,13 @@
 
 	&.selected {
 		border: 1px solid #222;
+
+		&:hover {
+			border: 1px solid #222;
+		}
+	}
+
+	&:hover {
+		border: 1px dashed #222;
 	}
 }

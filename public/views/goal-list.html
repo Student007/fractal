@@ -4,7 +4,7 @@
 			<div class="titem-header" ng-class="{'first':$first}">
 				<div class="titem-timeline-holder">
 					<div class="titem-pushbar" style="width: {{ g.timeline.push }}%;" ng-hide="g.timeline.push <= 0"></div>
-					<div class="titem-bar" style="width: {{ g.timeline.size }}%;"></div>
+					<div class="titem-bar {{ g.category.color ? g.category.color : 'cat-default'}}"  style="width: {{ g.timeline.size }}%;"></div>
 				</div>
 				<div class="titem-header-data">
 					<h3 class="titem-title">{{ g.goal.name }}</h3>
