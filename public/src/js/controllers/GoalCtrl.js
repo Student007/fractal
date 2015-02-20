@@ -58,7 +58,7 @@ angular.module('goals').controller('GoalController', function($scope, $routePara
         if (found.length) {
             return found[0].color;
         } else {
-            return 'category-default';
+            return 'cat-default';
         }
     };
 

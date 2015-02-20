@@ -158,7 +158,6 @@ $bar-height: 40px;
 
 		.tag {
 			margin-right: 4px;
-			margin-left: 0;
 		}
 	}
 
@@ -173,6 +172,11 @@ $bar-height: 40px;
 			color: #494848;
 			padding: 8px 8px;
 		}
+	}
+
+	.tag {
+		margin-right: 4px;
+		margin-left: 0;
 	}
 
 	.tab-content {
@@ -210,5 +214,34 @@ $bar-height: 40px;
 	.panel-body {
 		padding: 0;
 		border: 0 !important;
+	}
+
+	.subg {
+		width: 30%;
+		display: inline-block;
+		margin: 5px;
+		background: #fff;
+		color: $default-font-color;
+		height: 85px;
+		border: 1px solid #ccc;
+
+		&:hover {
+			background: #f9f9f9;
+			color: $default-font-color;
+		}
+
+		.subg-category {
+			display: inline-block;
+			width: 10px;
+			height: 100%;
+			float: left;
+		}
+
+		.subg-content {
+			margin-left: 10px;
+			display: inline-block;
+			height: 100%;
+			font-size: 12px;
+		}
 	}
 }
