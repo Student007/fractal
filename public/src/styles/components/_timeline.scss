@@ -191,9 +191,11 @@ $bar-height: 40px;
 	}
 
 	.tab-content-body {
-		padding: 10px;
+		padding: 5px;
 		background: #eeeeee;
-		min-height: 200px;
+		height: 300px;
+		overflow-y: auto;
+		border-top: 1px solid #cccccc;
 	}
 
 	.panel-heading {
