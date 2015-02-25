@@ -1,9 +1,15 @@
-<div ng-repeat="milestone in milestones | orderBy: date" class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">{{ milestone.name }} <span class="pull-right">{{ milestone.date | date: 'MM/dd/yyyy' }}</span></h3>
-	</div>
-	<div class="panel-body">
-		<button class="btn btn-primary" ng-click="milestoneActions.update(milestone)">Edit</button>
-		<button class="btn btn-danger" ng-click="milestoneActions.delete(milestone)">Delete</button>
+<div ng-repeat="m in timelineMilestones | orderBy: date" class="timeline-item">
+	<div class="titem-header" ng-class="{'first':$first}">
+		<div class="titem-timeline-holder">
+			<div class="titem-pushbar" style="width: {{ m.timeline.push }}%;" ng-hide="m.timeline.push <= 0 || m.timeline.push >= 100"></div>
+			<div class="titem-bar {{ m.category.color ? m.category.color : 'cat-default'}}"  style="width: {{ dateTimeline.tick }}%;"></div>
+		</div>
+		<div class="titem-header-data">
+			<h3 class="titem-title">{{ m.name }}</h3>
+			<div class="titem-header-ctrls pull-right">
+				<span class="titem-header-date" ng-show="m.date"><strong>{{ m.date | date:'MM/dd/yyyy'}}</strong></span>
+				<span class="titem-header-actions"><a class="fa fa-edit" ng-click="barEdit(m, $event)"></a></a><a class="fa fa-external-link"></a></span>
+			</div>
+		</div>
 	</div>
 </div>

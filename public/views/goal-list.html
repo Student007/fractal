@@ -42,7 +42,7 @@
 								<div class="subg-content">
 									<h4>{{ subg.name | ellipsis: 20 }}</h4>
 									<span class="fa fa-tag tag"></span><span ng-bind="getCategoryName(subg.categoryId)"></span>
-									<div class="subg-date"><span ng-show="subg.beginDate && subg.endDate"><strong>{{ subg.beginDate | date: 'MM/dd/yyyy' }}</strong> to <strong>{{ subg.endDate | date: 'MM/dd/yyyy' }}</strong></span><span ng-show="subg.beginDate && !(subg.endDate)"><strong>Begin: </strong>{{ subg.beginDate | date: 'MM/dd/yyyy' }}</span><span ng-show="!(subg.beginDate) && subg.endDate"><strong>End: </strong>{{ subg.endDate | date: 'MM/dd/yyyy' }}</span></div> 
+									<div class="subg-date"><span ng-show="subg.beginDate && subg.endDate"><strong>{{ subg.beginDate | date: 'MM/dd/yyyy' }}</strong> to <strong>{{ subg.endDate | date: 'MM/dd/yyyy' }}</strong> • {{ timeline.getNumDays(subg.beginDate, subg.endDate) }} days</span><span ng-show="subg.beginDate && !(subg.endDate)"><strong>Begin: </strong>{{ subg.beginDate | date: 'MM/dd/yyyy' }}</span><span ng-show="!(subg.beginDate) && subg.endDate"><strong>End: </strong>{{ subg.endDate | date: 'MM/dd/yyyy' }}</span></div> 
 								</div>
 							</a>
 						</div>

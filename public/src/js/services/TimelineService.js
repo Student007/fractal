@@ -1,6 +1,6 @@
 // public/js/services/TimelineService.js
 angular.module('goals').factory('TimelineService', function() {
-    return function(begin, end, subgoals) {
+    return function(begin, end, subgoals, milestones) {
         this.subgoals     = subgoals;
         this.subgoalRange = getSubgoalRange();
         this.goalBegin    = begin;
@@ -143,7 +143,7 @@ angular.module('goals').factory('TimelineService', function() {
             return results;
         };
 
-        //gets push and size values for timeline display
+        //gets push and size values for goal timeline display
         this.getGoalTimeline = function(begin, end) {
             var results = {
                 push: null,
@@ -214,9 +214,50 @@ angular.module('goals').factory('TimelineService', function() {
             return timelineSubgoals;
         };
 
+        // returns the push value for each individual milestone timeline
+        this.getMilestoneTimeline = function(begin) {
+            var results = {
+                push: null,
+            };
+            var itemBegin    = getProperStart(this.begin, this.end, begin);
+            var itemDaysPush = getNumDays(this.begin, itemBegin);
+
+            // console.log("itemBegin: " + itemBegin);
+            // console.log("itemDaysPush: " + itemDaysPush);
+
+            if (this.begin && this.end && this.days > 0) {
+                var roundPush = Math.round((itemDaysPush / this.days) * 100); //push %
+                var regPush = (itemDaysPush / this.days) * 100;
+                results.push = regPush;
+
+                // if (results.size === 0) {
+                //     results.size = 0.5;
+                // }
+            } else {
+                results.push = 0;
+            }
+
+            return results;
+        };
+
+        // returns list of milestones with appended timeline values
+        this.appendMilestoneTimelines = function() {
+            timelineMilestones = angular.copy(milestones);
+            for (var s in timelineMilestones) {
+                console.log(timelineMilestones[s].name);
+                timelineMilestones[s].timeline = this.getMilestoneTimeline(timelineMilestones[s].beginDate);
+            }
+            return timelineMilestones;
+        };
+
+        this.getNumDays = function(begin, end) {
+            return getNumDays(begin, end);
+        };
+
         // get number of days between two dates
         function getNumDays(begin, end) {
             var oneDay = 24*60*60*1000;
+            console.log('begin: ' + begin + ' end: ' + end);
             if (begin && end) {
                 var beginDate = new Date(begin);
                 var endDate = new Date(end);
