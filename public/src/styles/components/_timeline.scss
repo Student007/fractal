@@ -117,6 +117,12 @@ $bar-height: 40px;
 		}
 	}
 
+	.titem-header-tag {
+		line-height: 40px;
+		padding-left: 15px;
+		font-size: 12px;
+	}
+
 	.titem-header-actions {
 		padding: 0;
 
@@ -124,6 +130,7 @@ $bar-height: 40px;
 			color: inherit;
 			font-size: 16px;
 			padding: 12px !important;
+			cursor: pointer;
 		}
 
 		a:hover {

@@ -218,23 +218,41 @@ angular.module('goals').factory('TimelineService', function() {
         this.getMilestoneTimeline = function(begin) {
             var results = {
                 push: null,
+                size: null
             };
             var itemBegin    = getProperStart(this.begin, this.end, begin);
+            var itemDays     = 1;
             var itemDaysPush = getNumDays(this.begin, itemBegin);
 
-            // console.log("itemBegin: " + itemBegin);
-            // console.log("itemDaysPush: " + itemDaysPush);
+            console.log("MILESTONE begin: " + begin);
+            console.log("MILESTONE itemBegin: " + itemBegin);
+            console.log("MILESTONE itemDaysPush: " + itemDaysPush);
 
             if (this.begin && this.end && this.days > 0) {
                 var roundPush = Math.round((itemDaysPush / this.days) * 100); //push %
+                var roundSize = Math.round((itemDays / this.days) * 100); // size %
+
                 var regPush = (itemDaysPush / this.days) * 100;
+                var regSize = (itemDays / this.days) * 100;
+
                 results.push = regPush;
+                results.size = regSize;
 
                 // if (results.size === 0) {
                 //     results.size = 0.5;
                 // }
+
+                if ((results.push + results.size) > 100) {
+                    var overflow = (results.push + results.size) - 100;
+                    results.size = results.size - overflow;
+                }
+
+                if (results.size < 0.1) {
+                    results.size = 0.1;
+                }
             } else {
                 results.push = 0;
+                results.size = 100;
             }
 
             return results;
@@ -245,7 +263,7 @@ angular.module('goals').factory('TimelineService', function() {
             timelineMilestones = angular.copy(milestones);
             for (var s in timelineMilestones) {
                 console.log(timelineMilestones[s].name);
-                timelineMilestones[s].timeline = this.getMilestoneTimeline(timelineMilestones[s].beginDate);
+                timelineMilestones[s].timeline = this.getMilestoneTimeline(timelineMilestones[s].date);
             }
             return timelineMilestones;
         };
