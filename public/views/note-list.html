@@ -1,10 +1,10 @@
-<div ng-repeat="note in notes | orderBy: dateAdded" class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">{{ note.name }} <span class="pull-right">{{ note.dateAdded | date: 'MM/dd/yyyy' }}</span></h3>
-	</div>
-	<div class="panel-body">
-		<p ng-bind-html="note.description | nl2br"></p>
-		<button class="btn btn-primary" ng-click="noteActions.update(note)">Edit</button>
-		<button class="btn btn-danger" ng-click="noteActions.delete(note)">Delete</button>
+<div ng-repeat="note in notes | orderBy: dateAdded">
+	<div class="panel panel-default note">
+		<div class="panel-heading">
+			<h3 class="panel-title">{{ note.name }} <span class="pull-right"><span class="note-date"><strong>{{ note.dateAdded | date: 'MM/dd/yyyy' }}</strong></span><a ng-click="noteActions.update(note)" class="edit-action"><span class="fa fa-edit"></span></a></span></h3>
+		</div>
+		<div class="panel-body">
+			<p ng-bind-html="note.description | nl2br"></p>
+		</div>
 	</div>
 </div>

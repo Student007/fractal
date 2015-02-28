@@ -1,4 +1,4 @@
-<div ng-repeat="m in timelineMilestones | orderBy: date" class="timeline-item">
+<div ng-repeat="m in timelineMilestones | orderBy: date" class="timeline-item milestone">
 	<div class="titem-header" ng-class="{'first':$first}">
 		<div class="titem-timeline-holder">
 			<div class="titem-pushbar" style="width: {{ m.timeline.push }}%;" ng-hide="m.timeline.push <= 0 || m.timeline.push >= 100"></div>

@@ -1,20 +1,22 @@
 <!-- public/views/categories.html -->
-
-<div>
-    <h3>Categories</h3>
+<div ng-show="loadComplete">
+    <div class="page-header">
+        <h3>Categories</h3>
+    </div>
+    <div class="container">
+        <div class="actions-holder">
+            <button class="btn btn-primary" ng-click="create()">New Category</button>
+            <button class="btn btn-primary" ng-click="back()">Back</button>
+        </div>
+        <div ng-repeat="c in categories | orderBy: 'c.name'" class="panel panel-default">
+            <div class="panel-heading {{ c.color }} color-heading">
+                <h3 class="panel-title"><strong>{{ c.name }}</strong><span class="pull-right"><a ng-click="update(c)" class="edit-action"><span class="fa fa-edit"></span></a><a ng-click="delete(c)" class="edit-action"><span class="fa fa-remove"></span></a></span></h3>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <button class="btn btn-primary" ng-click="create()">New Category</button>
-    <hr />
-    <div ng-repeat="c in categories | orderBy: 'c.name'"class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ c.name }}</h3>
-        </div>
-        <div class="panel-body">
-            {{ c.description }}<br />
-            {{ c.color }}<br />
-            <button class="btn btn-primary" ng-click="update(c)">Edit</button>
-            <button class="btn btn-danger" ng-click="delete(c)">Delete</button>
-        </div>
+<div ng-hide="loadComplete" class="goal-page">
+    <div class="text-center loading">
+        <img src="img/ajax-loader.gif" />
     </div>
 </div>

@@ -57,6 +57,10 @@ $bar-height: 40px;
 }
 
 .timeline-item {
+	&.milestone {
+		margin-bottom: 5px;
+	}
+
 	.titem-header {
 		position: relative;
 		border-left: 1px solid #dddddd;
@@ -225,7 +229,7 @@ $bar-height: 40px;
 		border: 0 !important;
 	}
 
-	.subg {
+	.sub {
 		width: 31%;
 		float: left;
 		display: inline-block;
@@ -240,14 +244,14 @@ $bar-height: 40px;
 			color: $default-font-color;
 		}
 
-		.subg-category {
+		.sub-category {
 			display: inline-block;
 			width: 10px;
 			height: 100%;
 			float: left;
 		}
 
-		.subg-content {
+		.sub-content {
 			margin-left: 10px;
 			display: inline-block;
 			height: 100%;

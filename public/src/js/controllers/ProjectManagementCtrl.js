@@ -1,7 +1,8 @@
 // public/src/js/controllers/ProjectManagementCtrl.js
 
 angular.module('goals').controller('ProjectManagementController', function($scope, $routeParams, $location, PageService, ModalService, ProjectService, method) {
-    $scope.method      = method;
+    $scope.method       = method;
+    $scope.loadComplete = false;
 
     var assignData = function(result) {
         if (result.error) {    
@@ -14,9 +15,14 @@ angular.module('goals').controller('ProjectManagementController', function($scop
             $scope.categories     = result.categories;
 
             $scope.displayName    = angular.copy($scope.project.name);
+            $scope.loadComplete   = true;
         }
     };
 
+    if ($scope.method === "create") {
+        $scope.loadComplete = true;
+    }
+    
     if ($scope.method === "update") {
         $scope.id      = $routeParams.projectId;
         PageService.getProjectLanding($scope.id).then(assignData);

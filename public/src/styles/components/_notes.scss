@@ -1,0 +1,12 @@
+/* _notes.scss */
+
+.note {
+	.panel-body p {
+		word-wrap: break-word;
+	}
+
+	.note-date {
+		font-size: 14px;
+		padding-right: 5px;
+	}
+}

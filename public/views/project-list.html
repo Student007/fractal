@@ -1,22 +1,24 @@
 <!-- public/views/project-list.html -->
-
-<div class="container">
-	<div>
-		<h1>Hello.</h1>
+<div ng-show="loadComplete">
+	<div class="page-header">
+	    <h3>Your Projects</h3>
 	</div>
-	<div>
-		<h4>Projects:</h4>
-		<a class="btn btn-primary" href="/project/new">New Project</a>
-		<hr />
+	<div class="container">
+		<div class="actions-holder">
+			<a class="btn btn-primary" href="/project/new">New Project</a>
+		</div>
 		<div ng-repeat="p in projects | orderBy: 'p.name'"class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">{{ p.name }}</h3>
+				<h3 class="panel-title"><strong>{{ p.name }}</strong><span class="pull-right"><a href="/project/{{ p._id }}/manage" class="edit-action"><span class="fa fa-edit"></span></a><a href="/project/{{ p._id }}" class="edit-action"><span class="fa fa-external-link"></span></a></span></h3>
 			</div>
 			<div class="panel-body">
-				{{ p.description }}<br />
-				<a href="/project/{{ p._id }}">Open Project »</a>
-				<a class="btn btn-primary" href="/project/{{ p._id }}/manage">Manage</a>
+				{{ p.description }}
 			</div>
 		</div>
 	</div>
+</div>
+<div ng-hide="loadComplete" class="goal-page">
+    <div class="text-center loading">
+        <img src="img/ajax-loader.gif" />
+    </div>
 </div>

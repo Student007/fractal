@@ -1,8 +1,9 @@
 // public/src/js/controllers/CategoryCtrl.js
 
-angular.module('goals').controller('CategoryController', function($scope, $routeParams, CategoryService, ModalService) {
-    $scope.id         = $routeParams.projectId;
-    $scope.categories = [];
+angular.module('goals').controller('CategoryController', function($scope, $routeParams, $location, CategoryService, ModalService) {
+    $scope.id           = $routeParams.projectId;
+    $scope.categories   = [];
+    $scope.loadComplete = false;
     
     var assignData    = function(result) {
         console.log(result.data);
@@ -10,10 +11,15 @@ angular.module('goals').controller('CategoryController', function($scope, $route
             $scope.errorActions.errorRelocateToProject($routeParams.projectId, result.error.message);
         } else {
             $scope.categories = result.data;
+            $scope.loadComplete = true;
         }
     };
 
     CategoryService.getByProject($scope.id).then(assignData);
+
+    $scope.back = function() {
+        $location.path('/project/' + $scope.id);
+    };
 
     $scope.create = function() {
         ModalService.createCategoryModal($scope.id, function(category) {

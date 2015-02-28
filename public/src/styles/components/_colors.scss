@@ -1,7 +1,7 @@
 /* colors.scss - for all category color classes */
 
 @mixin category-color($color, $font-color) {
-	background: $color;
+	background: $color !important;
 	color: $font-color;
 
 	.brighter {
