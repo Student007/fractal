@@ -37,7 +37,7 @@
 						<tab-heading><span class="fa fa-copy"></span> Subgoals</tab-heading>
 						<div class="text-right tab-content-header"><a href ng-click="goalActions.create(g.goal.projectId, g.goal._id)"><span class="fa fa-plus"></span> Add New</a></div>
 						<div class="tab-content-body">
-							<a class="sub" ng-repeat="subg in g.subgoals | orderBy: 'beginDate'" href="/project/{{ subg.projectId }}/goal/{{ subg._id }}">
+							<a class="sub col-md-3" ng-repeat="subg in g.subgoals | orderBy: 'beginDate'" href="/project/{{ subg.projectId }}/goal/{{ subg._id }}">
 								<div class="sub-category" ng-class="getCategoryColor(subg.categoryId)">&nbsp;</div>
 								<div class="sub-content">
 									<h4>{{ subg.name | ellipsis: 20 }}</h4>
@@ -61,7 +61,7 @@
 						<tab-heading><span class="fa fa-flag"></span> Milestones</tab-heading>
 						<div class="text-right tab-content-header"><a href ng-click="milestoneActions.create(g.goal.projectId, g.goal._id)"><span class="fa fa-plus"></span> Add New</a></div>
 						<div class="tab-content-body">
-							<div class="sub" ng-repeat="subm in g.milestones | orderBy: 'date'">
+							<div class="sub col-md-3" ng-repeat="subm in g.milestones | orderBy: 'date'">
 								<div class="sub-category" ng-class="getCategoryColor(subm.categoryId)">&nbsp;</div>
 								<div class="sub-content">
 									<h4>{{ subm.name | ellipsis: 20 }}</h4>

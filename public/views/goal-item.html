@@ -30,7 +30,7 @@
 		</div>
 		<breadcrumbs ng-if="isGoal" project="project" trail="breadcrumbs" goal="goal"></breadcrumbs>
 	</div>
-	<div class="container">
+	<div class="container content">
 		<div class="btn-group" dropdown>
 		  <button type="button" class="btn btn-primary" ng-click="goalActions.create(project._id, goal._id, goal.beginDate, goal.endDate)">Create</button>
 		  <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
@@ -60,6 +60,10 @@
 			</div>
 		</div>
 		<div>
+			<div ng-show="goal.description">
+				<h3>Description</h3>
+				<p>{{ goal.description }}</p>
+			</div>
 			<h3>Goals Timeline</h3>
 			<div class="nav-timeline">
 				<div class="dates clearfix">

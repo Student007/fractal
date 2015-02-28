@@ -230,7 +230,6 @@ $bar-height: 40px;
 	}
 
 	.sub {
-		width: 31%;
 		float: left;
 		display: inline-block;
 		margin: 5px;
@@ -238,6 +237,10 @@ $bar-height: 40px;
 		color: $default-font-color;
 		height: 85px;
 		border: 1px solid #ccc;
+
+		&.col-md-3 {
+			padding-left: 0;
+		}
 
 		&:hover {
 			background: #f9f9f9;
