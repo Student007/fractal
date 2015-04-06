@@ -2,6 +2,5 @@
 node_modules/
 db/
 public/dist/
-public/libs/
 public/tmp/
 npm-debug.log
